@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-public class ItemEntity
+public class ItemEntity : EntityBase
 {
-    public int id;
     public string displayTitle;
     public string description;
     public Defines.ItemType itemType;

@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-public class MonsterEntity
+public class MonsterEntity : EntityBase
 {
-    public int id;
     public string displayTitle;
     public string description;
     public int level;
