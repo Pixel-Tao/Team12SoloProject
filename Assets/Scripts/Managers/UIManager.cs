@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UIManager : Singleton<UIManager>
+public class UIManager : IManager
 {
     private Dictionary<string, UIPopupBase> popupDict = new Dictionary<string, UIPopupBase>();
     private int popupOrder = 10;
@@ -20,15 +20,14 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    public override void Init()
+    public void Init()
     {
-        base.Init();
         if (root != null)
         {
-            Destroy(root);
+            Managers.Resource.Destroy(root);
             root = null;
         }
-        if (FindObjectOfType<EventSystem>() == null)
+        if (GameObject.FindObjectOfType<EventSystem>() == null)
         {
             GameObject obj = new GameObject("EventSystem");
             obj.AddComponent<EventSystem>();
@@ -36,14 +35,16 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    public override void Release()
+    public void Clear()
     {
+        foreach (var popup in popupDict.Values)
+            Managers.Resource.Destroy(popup.gameObject);
+        popupDict.Clear();
         if (root != null)
         {
-            Destroy(root);
+            Managers.Resource.Destroy(root);
             root = null;
         }
-        base.Release();
     }
 
     public T LoadSceneUI<T>() where T : UISceneBase
@@ -54,7 +55,7 @@ public class UIManager : Singleton<UIManager>
             currentSceneUI = null;
         }
         string name = typeof(T).Name;
-        GameObject go = ResourceManager.Instance.Instantiate($"UI/Scene/{name}", Root.transform);
+        GameObject go = Managers.Resource.Instantiate($"UI/Scene/{name}", Root.transform);
         if (go == null)
         {
             Debug.LogError("Failed to load scene UI : " + typeof(T).Name);
@@ -77,7 +78,7 @@ public class UIManager : Singleton<UIManager>
 
         if (popupDict.TryGetValue(name, out UIPopupBase popup) == false)
         {
-            GameObject go = ResourceManager.Instance.Instantiate($"UI/Popup/{name}", Root.transform);
+            GameObject go = Managers.Resource.Instantiate($"UI/Popup/{name}", Root.transform);
             if (go == null)
             {
                 Debug.LogError("Failed to load popup : " + name);

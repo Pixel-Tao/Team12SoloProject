@@ -73,4 +73,9 @@ public class AudioSourcePool
         source.gameObject.SetActive(false);
         pool.Release(source);
     }
+    
+    public void Clear()
+    {
+        pool.Clear();
+    }
 }

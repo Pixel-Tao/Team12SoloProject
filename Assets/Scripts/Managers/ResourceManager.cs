@@ -1,10 +1,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceManager : Singleton<ResourceManager>
+/// <summary>
+/// Resources 폴더를 기준으로 파일을 로드하고 인스턴스화하는 매니저
+/// 추후 Addressable로 변경할 예정
+/// </summary>
+public class ResourceManager : IManager
 {
-    private Dictionary<string, GameObject> prefabDict = new Dictionary<string, GameObject>();
-    private Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
+    private Dictionary<string, GameObject> prefabDict;
+    private Dictionary<string, Sprite> spriteDict;
+
+    public void Init()
+    {
+        if (prefabDict == null)
+            prefabDict = new Dictionary<string, GameObject>();
+        if (spriteDict == null)
+            spriteDict = new Dictionary<string, Sprite>();
+    }
+    public void Clear()
+    {
+
+    }
 
     public T Load<T>(string path, bool isMultiple = false) where T : Object
     {
@@ -91,6 +107,11 @@ public class ResourceManager : Singleton<ResourceManager>
             return null;
         }
 
-        return Instantiate(prefab, parent);
+        return GameObject.Instantiate(prefab, parent);
+    }
+
+    public void Destroy(GameObject go)
+    {
+        GameObject.Destroy(go);
     }
 }

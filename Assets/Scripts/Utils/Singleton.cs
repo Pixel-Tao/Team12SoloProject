@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
@@ -30,6 +29,11 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     public virtual void Init()
     {
         Debug.Log($"Init {typeof(T).Name}");
+    }
+    
+    public virtual void Clear()
+    {
+        Debug.Log($"Clear {typeof(T).Name}");
     }
     
     public virtual void Release()

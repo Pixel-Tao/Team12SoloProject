@@ -1,18 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DBManager : Singleton<DBManager>
+public class DBManager : IManager
 {
     private const string dataListDirPath = "SO/DataList";
 
     private Dictionary<int, EntityBase> itemDb = new Dictionary<int, EntityBase>();
     private Dictionary<int, EntityBase> monsterDb = new Dictionary<int, EntityBase>();
 
-    public override void Init()
+    public void Init()
     {
-        base.Init();
         LoadItemDb();
         LoadMonsterDb();
+    }
+    public void Clear()
+    {
+        
     }
 
     private T LoadDataList<T>() where T : ScriptableObject
@@ -42,10 +45,6 @@ public class DBManager : Singleton<DBManager>
     }
 
 
-    public static T GetEntity<T>(int id) where T : EntityBase
-    {
-        return Instance.Get<T>(id);
-    }
     public T Get<T>(int id) where T : EntityBase
     {
         if (typeof(T) == typeof(ItemEntity))
@@ -66,10 +65,6 @@ public class DBManager : Singleton<DBManager>
         return null;
     }
     
-    public static int CountEntity<T>() where T : EntityBase
-    {
-        return Instance.Count<T>();
-    }
     public int Count<T>() where T : EntityBase
     {
         if (typeof(T) == typeof(ItemEntity))

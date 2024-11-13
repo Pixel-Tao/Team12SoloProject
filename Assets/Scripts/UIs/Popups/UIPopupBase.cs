@@ -16,6 +16,6 @@ public abstract class UIPopupBase : UIBase
     public override void Close(Defines.UIAnimationType type = Defines.UIAnimationType.None)
     {
         base.Close(type);
-        UIManager.Instance.ClosePopupUI(this);
+        Managers.UI.ClosePopupUI(this);
     }
 }

@@ -44,6 +44,11 @@ public class ObjectPool
     {
         pool.Release(go);
     }
+    
+    public void Clear()
+    {
+        pool.Clear();
+    }
 
     private GameObject CreateObject()
     {

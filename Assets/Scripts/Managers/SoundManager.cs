@@ -2,42 +2,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class SoundManager : Singleton<SoundManager>
+public class SoundManager : IManager
 {
-    private Dictionary<string, AudioClip> sfxClips;
-    private Dictionary<string, AudioClip> bgmClips;
+    private Dictionary<string, AudioClip> sfxClips = new Dictionary<string, AudioClip>();
+    private Dictionary<string, AudioClip> bgmClips = new Dictionary<string, AudioClip>();
 
-    private AudioSource bgmSource;
+    private AudioSource _bgmSource;
+    public AudioSource BgmSource
+    {
+        get
+        {
+            if (_bgmSource == null)
+            {
+                GameObject bgmSourceObject = new GameObject { name = "@BGM" };
+                _bgmSource = bgmSourceObject.AddComponent<AudioSource>();
+                _bgmSource.outputAudioMixerGroup = masterMixer?.FindMatchingGroups("BGM")[0];
+                _bgmSource.loop = true;
+                Object.DontDestroyOnLoad(bgmSourceObject);
+            }
+            return _bgmSource;
+        }
+    }
     private AudioSourcePool audioSourcePool;
+    
 
     private AudioMixer masterMixer;
 
     private int defaultCapacity = 10;
     private int maxSize = 20;
+    
+    private bool initialized;
 
-    public override void Init()
+    public void Init()
     {
-        base.Init();
+        if (initialized) return;
+        
+        initialized = true;
+        masterMixer = Managers.Resource.Load<AudioMixer>("Sounds/MasterMixer");
+        AudioClip[] bgms = Managers.Resource.LoadAll<AudioClip>("Sounds/BGM");
 
-        masterMixer = ResourceManager.Instance.Load<AudioMixer>("Sounds/MasterMixer");
-        AudioClip[] bgms = ResourceManager.Instance.LoadAll<AudioClip>("Sounds/BGM");
-        bgmClips = new Dictionary<string, AudioClip>();
         foreach (var clip in bgms)
             bgmClips.Add(clip.name, clip);
 
         Debug.Log($"BGM Loaded Count : {bgmClips.Count}");
 
-        AudioClip[] sfxs = ResourceManager.Instance.LoadAll<AudioClip>("Sounds/SFX");
-        sfxClips = new Dictionary<string, AudioClip>();
+        AudioClip[] sfxs = Managers.Resource.LoadAll<AudioClip>("Sounds/SFX");
+
         foreach (var clip in sfxs)
             sfxClips.Add(clip.name, clip);
 
         Debug.Log($"SFX Loaded Count : {sfxClips.Count}");
 
-        // BGM용 AudioSource 생성
-        bgmSource = gameObject.AddComponent<AudioSource>();
-        bgmSource.outputAudioMixerGroup = masterMixer?.FindMatchingGroups("BGM")[0];
-        bgmSource.loop = true;
 
         var sfxGroup = masterMixer?.FindMatchingGroups("SFX")[0];
         // AudioSource 풀 생성
@@ -46,6 +61,10 @@ public class SoundManager : Singleton<SoundManager>
             defaultCapacity: defaultCapacity,
             maxSize: maxSize
         );
+    }
+    public void Clear()
+    {
+        audioSourcePool?.Clear();
     }
 
     // 위치 기반 SFX 재생
@@ -59,7 +78,7 @@ public class SoundManager : Singleton<SoundManager>
             source.Play();
 
             // 사운드가 끝나면 반환
-            StartCoroutine(ReturnSourceWhenFinished(source, clip.length));
+            Managers.Coroutine.StartCoroutine(name, ReturnSourceWhenFinished(source, clip.length));
         }
         else
         {
@@ -78,8 +97,8 @@ public class SoundManager : Singleton<SoundManager>
     {
         if (bgmClips.TryGetValue(name, out AudioClip clip))
         {
-            bgmSource.clip = clip;
-            bgmSource.Play();
+            BgmSource.clip = clip;
+            BgmSource.Play();
         }
         else
         {
@@ -89,7 +108,7 @@ public class SoundManager : Singleton<SoundManager>
 
     public void StopBGM()
     {
-        bgmSource.Stop();
+        BgmSource.Stop();
     }
 
     public void SetSFXVolume(float volume)

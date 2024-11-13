@@ -6,6 +6,9 @@ using UnityEngine;
 /// </summary>
 public abstract class SceneBase : MonoBehaviour
 {
+    [SerializeField] private Defines.SceneType sceneType = Defines.SceneType.None;
+    public Defines.SceneType SceneType => sceneType;
+    
     private void Start()
     {
         OnSceneLoad();
