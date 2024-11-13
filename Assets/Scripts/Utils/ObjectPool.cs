@@ -8,10 +8,21 @@ public class ObjectPool
     private string name;
     private GameObject prefab;
     private Transform parent;
-
-    public ObjectPool(string name, GameObject prefab, Transform parent = null, int defaultCapacity = 10, int maxSize = 100)
+    private Transform root
     {
-        this.name = name;
+        get
+        {
+            if (parent == null)
+            {
+                parent = new GameObject { name = $"@{prefab.name}_Pool" }.transform;
+            }
+
+            return parent;
+        }
+    }
+
+    public ObjectPool(GameObject prefab, Transform parent = null, int defaultCapacity = 10, int maxSize = 100)
+    {
         this.prefab = prefab;
         this.parent = parent;
         this.pool = new ObjectPool<GameObject>(
@@ -24,20 +35,20 @@ public class ObjectPool
         );
     }
 
-    public GameObject Spawn()
+    public GameObject Pop()
     {
         return pool.Get();
     }
 
-    public void Despawn(GameObject go)
+    public void Push(GameObject go)
     {
         pool.Release(go);
     }
 
     private GameObject CreateObject()
     {
-        GameObject go = GameObject.Instantiate(prefab, parent);
-        go.name = name;
+        GameObject go = GameObject.Instantiate(prefab, root);
+        go.name = prefab.name;
         return go;
     }
 

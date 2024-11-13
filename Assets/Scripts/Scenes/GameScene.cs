@@ -8,6 +8,9 @@ public class GameScene : SceneBase
         // 1. 씬 로드시 필요한 로직을 수행
         DBManager.Instance.Init();
         ResourceManager.Instance.Init();
+        UIManager.Instance.Init();
+        
+        UIManager.Instance.LoadSceneUI<UIGameScene>();
 
         StartCoroutine(Dummy());
     }

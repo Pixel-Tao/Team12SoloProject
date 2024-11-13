@@ -5,7 +5,9 @@ public class TitleScene : SceneBase
     protected override void OnSceneLoad()
     {
         // 1. 씬 로드시 필요한 로직을 수행
+        UIManager.Instance.Init();
         
+        UIManager.Instance.LoadSceneUI<UITitleScene>();
     }
     protected override void OnSceneLoaded()
     {

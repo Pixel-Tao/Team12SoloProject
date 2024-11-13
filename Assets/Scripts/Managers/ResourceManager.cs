@@ -78,7 +78,7 @@ public class ResourceManager : Singleton<ResourceManager>
     }
     public GameObject Instantiate(string prefabPath, Transform parent = null)
     {
-        GameObject prefab = Load<GameObject>(prefabPath);
+        GameObject prefab = Load<GameObject>($"Prefabs/{prefabPath}");
         if (prefab == null)
         {
             Debug.LogError($"Failed to load prefab : {prefabPath}");

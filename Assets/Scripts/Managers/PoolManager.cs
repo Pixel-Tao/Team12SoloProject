@@ -13,33 +13,45 @@ public class PoolManager : Singleton<PoolManager>
         
     }
 
-    private ObjectPool CreatePool(string prefabPathWithoutPrefabRoot, Transform parent = null)
+    private ObjectPool CreatePool(GameObject prefab, Transform parent = null)
     {
-        GameObject prefab = ResourceManager.Instance.Load<GameObject>($"Prefabs/{prefabPathWithoutPrefabRoot}");
-        if (prefab == null)
-        {
-            Debug.Log($"Failed to load prefab : {prefabPathWithoutPrefabRoot}");
-            return null;
-        }
-
-        ObjectPool pool = new ObjectPool(prefabPathWithoutPrefabRoot, prefab, parent, defaultCapacity, maxSize);
-        poolDict.Add(prefabPathWithoutPrefabRoot, pool);
+        ObjectPool pool = new ObjectPool(prefab, parent, defaultCapacity, maxSize);
+        poolDict.Add(prefab.name, pool);
         return pool;
+    }
+    
+    public GameObject Spawn(GameObject prefab, Transform parent = null)
+    {
+        if (poolDict.TryGetValue(prefab.name, out ObjectPool pool) == false)
+            pool = CreatePool(prefab, parent);
+        
+        return pool.Pop();
     }
 
     public GameObject Spawn(string prefabPathWithoutPrefabRoot, Transform parent = null)
     {
-        if (poolDict.TryGetValue(prefabPathWithoutPrefabRoot, out ObjectPool pool) == false)
-            pool = CreatePool(prefabPathWithoutPrefabRoot, parent);
+        string name = prefabPathWithoutPrefabRoot.Substring(prefabPathWithoutPrefabRoot.LastIndexOf('/') + 1);
 
-        return pool.Spawn();
+        if (poolDict.TryGetValue(name, out ObjectPool pool) == false)
+        {
+            GameObject prefab = ResourceManager.Instance.Load<GameObject>($"Prefabs/{prefabPathWithoutPrefabRoot}");
+            if (prefab == null)
+            {
+                Debug.Log($"Failed to load prefab : {prefabPathWithoutPrefabRoot}");
+                return null;
+            }
+            
+            pool = CreatePool(prefab, parent);
+        }
+        
+        return pool.Pop();
     }
-
+    
     public void Despawn(GameObject go)
     {
         if (poolDict.TryGetValue(go.name, out ObjectPool pool))
         {
-            pool.Despawn(go);
+            pool.Push(go);
         }
         else
         {
