@@ -3,13 +3,5 @@
 /// </summary>
 public abstract class UISlotBase : UIBase
 {
-    public override void Open()
-    {
-        
-    }
-    
-    public override void Close()
-    {
-        
-    }
+
 }

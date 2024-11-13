@@ -7,13 +7,15 @@ public abstract class UIPopupBase : UIBase
 {
     public bool IsOpen => gameObject.activeInHierarchy;
     
-    public override void Open()
+    public override void Open(Defines.UIAnimationType type = Defines.UIAnimationType.None)
     {
         gameObject.SetActive(true);
+        base.Open(type);
     }
     
-    public override void Close()
+    public override void Close(Defines.UIAnimationType type = Defines.UIAnimationType.None)
     {
+        base.Close(type);
         UIManager.Instance.ClosePopupUI(this);
     }
 }

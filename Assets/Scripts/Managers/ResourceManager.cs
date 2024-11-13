@@ -46,7 +46,7 @@ public class ResourceManager : Singleton<ResourceManager>
                 {
                     if (s.name == multipleSpriteName)
                         sprite = s;
-                    
+
                     spriteDict.Add($"{filePathWithoutName}/{s.name}", s);
                 }
 
@@ -76,6 +76,12 @@ public class ResourceManager : Singleton<ResourceManager>
             return sprite;
         }
     }
+    public T[] LoadAll<T>(string path) where T : Object
+    {
+        T[] items = Resources.LoadAll<T>(path);
+        return items;
+    }
+
     public GameObject Instantiate(string prefabPath, Transform parent = null)
     {
         GameObject prefab = Load<GameObject>($"Prefabs/{prefabPath}");

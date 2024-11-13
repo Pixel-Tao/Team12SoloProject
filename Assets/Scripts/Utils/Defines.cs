@@ -1,5 +1,25 @@
 public static class Defines
 {
+  /// <summary>
+  /// UI EventType
+  /// </summary>
+  public enum UIEvent
+  {
+    None,
+    Click,
+    Pressed,
+    PointerDown,
+    PointerUp,
+    Drag,
+    BeginDrag,
+    EndDrag,
+  }
+
+  public enum UIAnimationType
+  {
+    None,
+  }
+  
   public enum CalcType
   {
     Add,
