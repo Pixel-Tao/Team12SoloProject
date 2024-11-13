@@ -6,7 +6,7 @@ public class ResourceManager : Singleton<ResourceManager>
     private Dictionary<string, GameObject> prefabDict = new Dictionary<string, GameObject>();
     private Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
 
-    public T Load<T>(string path) where T : Object
+    public T Load<T>(string path, bool isMultiple = false) where T : Object
     {
         System.Type t = typeof(T);
         if (t == typeof(GameObject))
@@ -19,10 +19,14 @@ public class ResourceManager : Singleton<ResourceManager>
             }
             return prefab as T;
         }
+        else if (t == typeof(Sprite))
+        {
+            return LoadSprite(path, isMultiple) as T;
+        }
 
         return null;
     }
-    public Sprite Load(string filePath, bool isMultiple = false)
+    private Sprite LoadSprite(string filePath, bool isMultiple = false)
     {
         if (isMultiple)
         {

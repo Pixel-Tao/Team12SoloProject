@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
@@ -19,23 +20,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             instance = FindObjectOfType<T>();
             if (instance == null)
             {
-                instance = new GameObject(typeof(T).Name).AddComponent<T>();
+                instance = new GameObject($"@{typeof(T).Name}").AddComponent<T>();
                 if (Application.isPlaying)
                     DontDestroyOnLoad(instance.gameObject);
             }
-        }
-    }
-    
-    private void Awake()
-    {
-        if (instance == this)
-        {
-            instance = this as T;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
         }
     }
 
@@ -44,7 +32,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         Debug.Log($"Init {typeof(T).Name}");
     }
     
-    public void SingletonDestory()
+    public virtual void Release()
     {
         Destroy(instance.gameObject);
         instance = null;
