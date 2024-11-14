@@ -99,4 +99,9 @@ public static class Defines
         MoveSpeed,
         Armor,
     }
+    
+    public const string ITEM_RARIY_COMMON_COLOR = "808080";
+    public const string ITEM_RARIY_RARE_COLOR = "0070dd";
+    public const string ITEM_RARIY_EPIC_COLOR = "a335ee";
+    public const string ITEM_RARIY_UNIQUE_COLOR = "ff8000";
 }

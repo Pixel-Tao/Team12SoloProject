@@ -47,4 +47,28 @@ public class Utils
 
         return null;
     }
+
+    public static Color HexToColor(string hex)
+    {
+        // hex = "#FF00FFFF"
+        if (!hex.StartsWith("#"))
+            hex = $"#{hex}";
+
+        if (ColorUtility.TryParseHtmlString(hex, out Color color))
+            return color;
+
+        return Color.clear;
+    }
+
+    public static Color GetItemRarityColor(Defines.ItemRarityType type)
+    {
+        return type switch
+        {
+            Defines.ItemRarityType.Common => HexToColor(Defines.ITEM_RARIY_COMMON_COLOR),
+            Defines.ItemRarityType.Rare => HexToColor(Defines.ITEM_RARIY_RARE_COLOR),
+            Defines.ItemRarityType.Epic => HexToColor(Defines.ITEM_RARIY_EPIC_COLOR),
+            Defines.ItemRarityType.Unique => HexToColor(Defines.ITEM_RARIY_UNIQUE_COLOR),
+            _ => Color.white,
+        };
+    }
 }

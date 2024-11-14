@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db4b903a18684d4aafe57e73356863f7, type: 3}
+  m_Name: ShopDataList
+  m_EditorClassIdentifier: 
+  ShopList:
+  - id: 501
+    displayTitle: "\uC7A1\uD654 \uC0C1\uC778"
+    description: "\uBB3C\uC57D\uC774\uB098 \uC7A1\uD654\uB97C \uAD6C\uB9E4\uD560
+      \uC218 \uC788\uB2E4."
+    shopSaleEntities:
+    - shopId: 501
+      itemId: 1001
+      price: 100
+    - shopId: 501
+      itemId: 1002
+      price: 100
+    - shopId: 501
+      itemId: 1003
+      price: 1000
+    - shopId: 501
+      itemId: 1004
+      price: 1000
+    - shopId: 501
+      itemId: 1005
+      price: 1000
+    - shopId: 501
+      itemId: 1006
+      price: 1000
+  - id: 502
+    displayTitle: "\uBB34\uAE30 \uC0C1\uC778"
+    description: "\uBB34\uAE30\uB9CC \uD30C\uB294 \uC0C1\uC778"
+    shopSaleEntities:
+    - shopId: 502
+      itemId: 1501
+      price: 150
+    - shopId: 502
+      itemId: 1502
+      price: 7700
+    - shopId: 502
+      itemId: 1503
+      price: 128000
+    - shopId: 502
+      itemId: 1504
+      price: 109999000
+  - id: 503
+    displayTitle: "\uBC29\uC5B4\uAD6C \uC0C1\uC778"
+    description: "\uBC29\uC5B4\uAD6C\uB9CC \uD30C\uB294 \uC0C1\uC778"
+    shopSaleEntities:
+    - shopId: 503
+      itemId: 1601
+      price: 230
+    - shopId: 503
+      itemId: 1602
+      price: 8900
+    - shopId: 503
+      itemId: 1603
+      price: 164800
+    - shopId: 503
+      itemId: 1604
+      price: 118886000
+  - id: 504
+    displayTitle: "\uC7A5\uC2E0\uAD6C \uC0C1\uC778"
+    description: "\uC7A5\uC2E0\uAD6C\uB9CC \uD30C\uB294 \uC0C1\uC778"
+    shopSaleEntities:
+    - shopId: 504
+      itemId: 1701
+      price: 430
+    - shopId: 504
+      itemId: 1702
+      price: 13200
+    - shopId: 504
+      itemId: 1703
+      price: 213700
+    - shopId: 504
+      itemId: 1704
+      price: 137774300

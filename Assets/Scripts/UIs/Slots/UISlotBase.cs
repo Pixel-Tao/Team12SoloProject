@@ -3,5 +3,5 @@
 /// </summary>
 public abstract class UISlotBase : UIBase
 {
-
+    
 }

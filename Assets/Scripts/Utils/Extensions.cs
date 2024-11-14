@@ -18,4 +18,9 @@ public static class Extensions
     {
         UIBase.BindEvent(go, action, dragAction, type);
     }
+
+    public static void UnBindEvent(this GameObject go, Action action = null, Action<BaseEventData> dragAction = null, Defines.UIEvent type = Defines.UIEvent.Click)
+    {
+        UIBase.UnBindEvent(go);
+    }
 }

@@ -17,6 +17,13 @@ public class ItemEntity : EntityBase
 }
 
 [Serializable]
+public class ItemShopInfoEntity
+{
+    public int itemId;
+    public long price;
+}
+
+[Serializable]
 public class ItemEquipableEntity
 {
     public int itemId;

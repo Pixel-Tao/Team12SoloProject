@@ -48,7 +48,7 @@ public class Managers : MonoBehaviour
 
     #endregion
 
-    #region CoreManagers
+    #region Core Managers
 
     private DBManager _db = new DBManager();
     private UIManager _ui = new UIManager();
@@ -89,6 +89,22 @@ public class Managers : MonoBehaviour
 
     #endregion
 
+    #region Content Managers
+
+    private ShopManager _shop = new ShopManager();
+    private UserManager _user = new UserManager();
+
+    public static ShopManager Shop
+    {
+        get { return Instance?._shop; }
+    }
+    public static UserManager User
+    {
+        get { return Instance?._user; }
+    }
+
+    #endregion
+
     public static long GetNextSequence()
     {
         lock (lockObj)
@@ -96,10 +112,14 @@ public class Managers : MonoBehaviour
 
         return sequence;
     }
-    
+
 
     public static void Clear()
     {
+        // Content Managers
+        Shop?.Clear();
+
+        // Core Managers
         UI?.Clear();
         Pool?.Clear();
         Sound?.Clear();

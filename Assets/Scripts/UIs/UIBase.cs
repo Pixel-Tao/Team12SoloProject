@@ -48,13 +48,13 @@ public abstract class UIBase : MonoBehaviour
                 objects[i] = Utils.FindChild<T>(gameObject, names[i], true);
 
             if (objects[i] == null)
-                Debug.Log($"Failed to bind({names[i]})");
+                Debug.LogWarning($"Failed to bind({names[i]})");
         }
     }
 
     protected void BindObject(Type type) { Bind<GameObject>(type); }
     protected void BindImage(Type type) { Bind<Image>(type); }
-    protected void BindText(Type type) { Bind<TextMeshProUGUI>(type); }
+    protected void BindText(Type type) { Bind<TMP_Text>(type); }
     protected void BindButton(Type type) { Bind<Button>(type); }
     protected void BindToggle(Type type) { Bind<Toggle>(type); }
 
@@ -107,6 +107,36 @@ public abstract class UIBase : MonoBehaviour
             case Defines.UIEvent.EndDrag:
                 evt.OnEndDragHandler -= dragAction;
                 evt.OnEndDragHandler += dragAction;
+                break;
+        }
+    }
+    public static void UnBindEvent(GameObject go, Action action = null, Action<BaseEventData> dragAction = null, Defines.UIEvent type = Defines.UIEvent.Click)
+    {
+        UIEventHandler evt = go.GetComponent<UIEventHandler>();
+        if (evt == null) return;
+        
+        switch (type)
+        {
+            case Defines.UIEvent.Click:
+                evt.OnClickHandler -= action;
+                break;
+            case Defines.UIEvent.Pressed:
+                evt.OnPressedHandler -= action;
+                break;
+            case Defines.UIEvent.PointerDown:
+                evt.OnPointerDownHandler -= action;
+                break;
+            case Defines.UIEvent.PointerUp:
+                evt.OnPointerUpHandler -= action;
+                break;
+            case Defines.UIEvent.Drag:
+                evt.OnDragHandler -= dragAction;
+                break;
+            case Defines.UIEvent.BeginDrag:
+                evt.OnBeginDragHandler -= dragAction;
+                break;
+            case Defines.UIEvent.EndDrag:
+                evt.OnEndDragHandler -= dragAction;
                 break;
         }
     }

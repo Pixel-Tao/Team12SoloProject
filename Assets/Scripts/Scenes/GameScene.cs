@@ -50,6 +50,8 @@ public class GameScene : SceneBase
         // 2. 씬 로드가 완료된 후 필요한 로직을 수행
         Managers.Sound.PlayBGM("BGM");
         Managers.Sound.SetMasterVolume(0.3f);
+        
+        Managers.User.Earn(10_000_000_000);
     }
     protected override void OnSceneUnload()
     {
