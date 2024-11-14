@@ -17,3 +17,4 @@ Team12SoloProject
   - UI : UI의 Prefab을 제외한 데이터 연동 및 이벤트 연동부분을 모드 동적으로 처리되도록 설계 했습니다.
   - Sound : AudioMixer를 사용하여 사운드를 관리하고 SFX의 경우 Pooling 하여 리소스를 사용합니다.
   - ObjectPool : PoolManager에서 거의 모든 오브젝트들을 Pool로 관리 할 수 있도록 했습니다.
+  - 기존 Manager들을 Managers 라는 하나의 Singleton으로 관리하도록 했습니다.
