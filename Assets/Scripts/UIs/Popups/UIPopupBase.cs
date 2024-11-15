@@ -18,11 +18,10 @@ public abstract class UIPopupBase : UIBase
     public override void Close(Defines.UIAnimationType type = Defines.UIAnimationType.None)
     {
         base.Close(type);
-        ClearDragable();
         Managers.UI.ClosePopupUI(this);
     }
 
-    protected void SetDragable(GameObject targetGo)
+    protected void SetDraggable(GameObject targetGo)
     {
         popupGo = targetGo;
         popupGo.BindEvent(dragAction: BeginDragEvent, type: Defines.UIEvent.BeginDrag);
@@ -30,8 +29,9 @@ public abstract class UIPopupBase : UIBase
         popupGo.BindEvent(dragAction: EndDragEvent, type: Defines.UIEvent.EndDrag);
     }
     
-    protected void ClearDragable()
+    protected void ClearDraggable()
     {
+        if (popupGo == null) return;
         popupGo.UnBindEvent(dragAction: BeginDragEvent, type: Defines.UIEvent.BeginDrag);
         popupGo.UnBindEvent(dragAction: DraggingEvent, type: Defines.UIEvent.Drag);
         popupGo.UnBindEvent(dragAction: EndDragEvent, type: Defines.UIEvent.EndDrag);

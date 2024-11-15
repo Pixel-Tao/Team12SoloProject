@@ -34,18 +34,19 @@ public class UIShopPopup : UIPopupBase
 
         GetButton(Buttons.CloseButton).gameObject.BindEvent(() => { Close(); });
 
-        SetDragable(GetObject(GameObjects.ShopPopup));
         return true;
     }
 
     public override void Open(Defines.UIAnimationType type = Defines.UIAnimationType.None)
     {
         base.Open(type);
+        SetDraggable(GetObject(GameObjects.ShopPopup));
         Managers.User.OnGoldChanged += UpdateGold;
     }
 
     public override void Close(Defines.UIAnimationType type = Defines.UIAnimationType.None)
     {
+        ClearDraggable();
         Managers.User.OnGoldChanged -= UpdateGold;
         base.Close(type);
     }
