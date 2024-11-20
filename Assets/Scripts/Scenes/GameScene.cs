@@ -14,6 +14,10 @@ public class GameScene : SceneBase
         Managers.UI.LoadSceneUI<UIGameScene>();
 
         Managers.Coroutine.StartCoroutine("Dummy", Dummy());
+        
+        
+        
+        
     }
 
     private IEnumerator Dummy()
@@ -33,7 +37,7 @@ public class GameScene : SceneBase
         Vector3 pos = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
         go.transform.position = pos;
         SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
-        sr.sprite = Managers.Resource.Load<Sprite>($"Textures/status/status_{num}", true);
+        sr.sprite = Managers.Resource.Load<Sprite>($"Textures/status/status_{num}");
         return go;
     }
 

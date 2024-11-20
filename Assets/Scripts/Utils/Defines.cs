@@ -104,4 +104,6 @@ public static class Defines
     public const string ITEM_RARIY_RARE_COLOR = "0070dd";
     public const string ITEM_RARIY_EPIC_COLOR = "a335ee";
     public const string ITEM_RARIY_UNIQUE_COLOR = "ff8000";
+    
+    public static readonly string[] ADDRESSABLE_LABELS = { "PreLoad" };
 }

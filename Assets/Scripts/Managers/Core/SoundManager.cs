@@ -4,8 +4,8 @@ using UnityEngine.Audio;
 
 public class SoundManager : IManager
 {
-    private Dictionary<string, AudioClip> sfxClips = new Dictionary<string, AudioClip>();
-    private Dictionary<string, AudioClip> bgmClips = new Dictionary<string, AudioClip>();
+    // private Dictionary<string, AudioClip> sfxClips = new Dictionary<string, AudioClip>();
+    // private Dictionary<string, AudioClip> bgmClips = new Dictionary<string, AudioClip>();
 
     private AudioSource _bgmSource;
     public AudioSource BgmSource
@@ -39,20 +39,20 @@ public class SoundManager : IManager
         
         initialized = true;
         masterMixer = Managers.Resource.Load<AudioMixer>("Sounds/MasterMixer");
-        AudioClip[] bgms = Managers.Resource.LoadAll<AudioClip>("Sounds/BGM");
-
-        foreach (var clip in bgms)
-            bgmClips.Add(clip.name, clip);
-
-        Debug.Log($"BGM Loaded Count : {bgmClips.Count}");
-
-        AudioClip[] sfxs = Managers.Resource.LoadAll<AudioClip>("Sounds/SFX");
-
-        foreach (var clip in sfxs)
-            sfxClips.Add(clip.name, clip);
-
-        Debug.Log($"SFX Loaded Count : {sfxClips.Count}");
-
+        // AudioClip[] bgms = Managers.Resource.LoadAll<AudioClip>("Sounds/BGM");
+        //
+        // foreach (var clip in bgms)
+        //     bgmClips.Add(clip.name, clip);
+        //
+        // Debug.Log($"BGM Loaded Count : {bgmClips.Count}");
+        //
+        // AudioClip[] sfxs = Managers.Resource.LoadAll<AudioClip>("Sounds/SFX");
+        //
+        // foreach (var clip in sfxs)
+        //     sfxClips.Add(clip.name, clip);
+        //
+        // Debug.Log($"SFX Loaded Count : {sfxClips.Count}");
+        //
 
         var sfxGroup = masterMixer?.FindMatchingGroups("SFX")[0];
         // AudioSource 풀 생성
@@ -70,20 +70,20 @@ public class SoundManager : IManager
     // 위치 기반 SFX 재생
     public void PlaySFX(string name, Vector3 position)
     {
-        if (sfxClips.TryGetValue(name, out AudioClip clip))
-        {
-            AudioSource source = audioSourcePool.Pop();
-            source.transform.position = position;
-            source.clip = clip;
-            source.Play();
-
-            // 사운드가 끝나면 반환
-            Managers.Coroutine.StartCoroutine(name, ReturnSourceWhenFinished(source, clip.length));
-        }
-        else
+        AudioClip clip = Managers.Resource.Load<AudioClip>(name);
+        if (clip == null)
         {
             Debug.LogWarning($"SFX '{name}' not found!");
+            return;
         }
+        
+        AudioSource source = audioSourcePool.Pop();
+        source.transform.position = position;
+        source.clip = clip;
+        source.Play();
+
+        // 사운드가 끝나면 반환
+        Managers.Coroutine.StartCoroutine(name, ReturnSourceWhenFinished(source, clip.length));
     }
 
     private System.Collections.IEnumerator ReturnSourceWhenFinished(AudioSource source, float delay)
@@ -95,15 +95,15 @@ public class SoundManager : IManager
     // BGM 재생 (전역 사운드)
     public void PlayBGM(string name)
     {
-        if (bgmClips.TryGetValue(name, out AudioClip clip))
-        {
-            BgmSource.clip = clip;
-            BgmSource.Play();
-        }
-        else
+        AudioClip clip = Managers.Resource.Load<AudioClip>(name);
+        if (clip == null)
         {
             Debug.LogWarning($"BGM '{name}' not found!");
+            return;
         }
+        
+        BgmSource.clip = clip;
+        BgmSource.Play();
     }
 
     public void StopBGM()

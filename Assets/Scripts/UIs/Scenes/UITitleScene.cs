@@ -1,4 +1,5 @@
-using UnityEngine.SceneManagement;
+using UnityEngine;
+using UObject = UnityEngine.Object;
 
 public class UITitleScene : UISceneBase
 {
@@ -7,6 +8,15 @@ public class UITitleScene : UISceneBase
         StartButton,
     }
     
+    private ResourceDownloader resourceDownloader;
+
+    private void Start()
+    {
+        resourceDownloader = gameObject.GetOrAddComponent<ResourceDownloader>();
+        resourceDownloader.OnInitAddressableCompleted += AddressableCompleted;
+        resourceDownloader.InitAddressableAsync();
+    }
+
     protected override bool Init()
     {
         if (base.Init() == false)
@@ -23,5 +33,53 @@ public class UITitleScene : UISceneBase
     public void StartButtonEvent()
     {
         Managers.Scene.LoadScene(Defines.SceneType.GameScene);
+    }
+    
+    
+
+    private void AddressableCompleted(bool needUpdate, long patchSize)
+    {
+        if (needUpdate)
+        {
+            // 업데이트 필요한 경우
+            // TODO : UI 처리
+            resourceDownloader.OnDownloadProgress += Downloading;
+            resourceDownloader.OnDownloadCompleted += DownloadCompleted;
+            resourceDownloader.Download();
+        }
+        else
+        {
+            // 업데이트가 필요하지 않는 경우
+            // TODO : UI 처리
+        }        
+    }
+    
+    private void Downloading(long downloaded, long total)
+    {
+        // TODO : UI 처리
+        
+    }
+    
+    private void DownloadCompleted(string[] labels)
+    {
+        // TODO : UI 처리
+        Managers.Resource.LoadAllAsync<UObject>(labels, (label, key, count, totalCount) =>
+        {
+            float ratio = count / (float)totalCount;
+        
+            Debug.Log($"label: {label}, key: {key}, count: {count}, totalCount: {totalCount}, ratio: {ratio}");
+            
+        });
+    }
+    
+    
+    private string LoadingMessage(int count, int total, string message)
+    {
+        return $"<color=#00FFFF>{message}</color> ({count}/{total})";
+    }
+
+    private string LoadingMessage(long totalSize)
+    {
+        return $"<color=#00FFFF>Downloading...</color> {Utils.GetFileSize(totalSize)}";
     }
 }

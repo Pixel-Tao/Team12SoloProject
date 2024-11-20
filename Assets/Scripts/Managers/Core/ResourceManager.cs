@@ -1,5 +1,10 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.ResourceLocations;
+using UObject = UnityEngine.Object;
 
 /// <summary>
 /// Resources 폴더를 기준으로 파일을 로드하고 인스턴스화하는 매니저
@@ -7,96 +12,27 @@ using UnityEngine;
 /// </summary>
 public class ResourceManager : IManager
 {
-    private Dictionary<string, GameObject> prefabDict;
-    private Dictionary<string, Sprite> spriteDict;
+    private Dictionary<string, UObject> resourceDict;
 
     public void Init()
     {
-        if (prefabDict == null)
-            prefabDict = new Dictionary<string, GameObject>();
-        if (spriteDict == null)
-            spriteDict = new Dictionary<string, Sprite>();
+        if (resourceDict == null)
+            resourceDict = new Dictionary<string, UObject>();
     }
     public void Clear()
     {
 
     }
-
-    public T Load<T>(string path, bool isMultiple = false) where T : Object
+    public T Load<T>(string name) where T : UObject
     {
-        System.Type t = typeof(T);
-        if (t == typeof(GameObject))
+        if (resourceDict.TryGetValue(name, out UObject resource))
         {
-            if (prefabDict.TryGetValue(path, out GameObject prefab) == false)
-            {
-                prefab = Resources.Load<GameObject>(path);
-                if (prefab != null)
-                    prefabDict.Add(path, prefab);
-            }
-            return prefab as T;
-        }
-        else if (t == typeof(Sprite))
-        {
-            return LoadSprite(path, isMultiple) as T;
+            return resource as T;
         }
 
         return null;
     }
-    private Sprite LoadSprite(string filePath, bool isMultiple = false)
-    {
-        if (isMultiple)
-        {
-            // 파일 여러개에서 스프라이트 가져옴
-            string multipleSpriteName = filePath.Substring(filePath.LastIndexOf('/') + 1);
-            string filePathWithoutName = filePath.Substring(0, filePath.LastIndexOf('/'));
-            if (spriteDict.TryGetValue(filePath, out Sprite sprite) == false)
-            {
-                Sprite[] sprites = Resources.LoadAll<Sprite>(filePathWithoutName);
-                if (sprites.Length == 0)
-                {
-                    Debug.LogError($"Failed to load multiple sprite : {filePathWithoutName}");
-                    return null;
-                }
 
-                foreach (Sprite s in sprites)
-                {
-                    if (s.name == multipleSpriteName)
-                        sprite = s;
-
-                    spriteDict.Add($"{filePathWithoutName}/{s.name}", s);
-                }
-
-                if (sprite == null)
-                {
-                    Debug.LogError($"Failed to load sprite item : {filePath}");
-                    return null;
-                }
-            }
-
-            return sprite;
-        }
-        else
-        {
-            // 파일 하나에서 스프라이트 가져옴
-            if (spriteDict.TryGetValue(filePath, out Sprite sprite) == false)
-            {
-                sprite = Resources.Load<Sprite>(filePath);
-                if (sprite == null)
-                {
-                    Debug.LogWarning($"Failed to load single sprite : {filePath}");
-                    return null;
-                }
-                spriteDict.Add(filePath, sprite);
-            }
-
-            return sprite;
-        }
-    }
-    public T[] LoadAll<T>(string path) where T : Object
-    {
-        T[] items = Resources.LoadAll<T>(path);
-        return items;
-    }
 
     public GameObject Instantiate(string prefabPath, Transform parent = null)
     {
@@ -114,4 +50,105 @@ public class ResourceManager : IManager
     {
         GameObject.Destroy(go);
     }
+
+
+    #region Addressable
+
+    public void LoadAsync<T>(string key, Action<T> callback = null) where T : UnityEngine.Object
+    {
+        if(resourceDict.TryGetValue(key, out UnityEngine.Object resource))
+        {
+            return;
+        }
+
+        string loadKey = key;
+        if(key.Contains(".sprite"))
+            loadKey = $"{key}[{key.Replace(".sprite", "")}]";
+
+        var asyncOperation = Addressables.LoadAssetAsync<T>(loadKey);
+        asyncOperation.Completed += (op) => 
+        {
+            if(resourceDict.ContainsKey(key) == false)
+            {
+                resourceDict.Add(key, op.Result);
+                callback?.Invoke(op.Result);
+            }
+            else
+            {
+                Debug.LogWarning($"Already loaded resource: {key}");
+                callback?.Invoke(op.Result);
+            }
+        }; 
+    }
+
+    public void LoadAllAsync<T>(string label, Action<string, int, int> callback) where T : UnityEngine.Object
+    {
+        var opHandle = Addressables.LoadResourceLocationsAsync(label, typeof(T));
+        opHandle.Completed += (op) =>
+        {
+            var locations = op.Result;
+            int totalCount = locations.Count;
+            int currentCount = 0;
+
+            foreach (var location in locations)
+            {
+                var key = location.PrimaryKey;
+                if (location.PrimaryKey.Contains(".sprite") || location.InternalId.Contains(".png"))
+                {
+                    LoadAsync<Sprite>(location.PrimaryKey, (obj) =>
+                    {
+                        currentCount++;
+                        callback?.Invoke(location.PrimaryKey, currentCount, totalCount);
+                    });
+                }
+                else
+                {
+                    LoadAsync<T>(key, (obj) =>
+                    {
+                        currentCount++;
+                        callback?.Invoke(key, currentCount, totalCount);
+                    });
+                }
+            }
+        };
+    }
+    public async void LoadAllAsync<T>(string[] labels, Action<string, string, int, int> callback) where T : UnityEngine.Object
+    {
+        int totalCount = 0;
+        int currentCount = 0;
+        Dictionary<string, IList<IResourceLocation>> locationDict = new Dictionary<string, IList<IResourceLocation>>();
+        foreach (var label in labels)
+        {
+            var opHandle = Addressables.LoadResourceLocationsAsync(label, typeof(T));
+            var locations = await opHandle.Task;
+            locationDict.Add(label, locations);
+            totalCount += locations.Count;
+        }
+        
+        foreach (var label in labels)
+        {
+            var locations = locationDict[label];
+            foreach (var location in locations)
+            {
+                var key = location.PrimaryKey;
+                if (location.PrimaryKey.Contains(".sprite") || location.InternalId.Contains(".png"))
+                {
+                    LoadAsync<Sprite>(location.PrimaryKey, (obj) =>
+                    {
+                        currentCount++;
+                        callback?.Invoke(label, location.PrimaryKey, currentCount, totalCount);
+                    });
+                }
+                else
+                {
+                    LoadAsync<T>(key, (obj) =>
+                    {
+                        currentCount++;
+                        callback?.Invoke(label, key, currentCount, totalCount);
+                    });
+                }
+            }
+        }
+    }
+    #endregion
 }

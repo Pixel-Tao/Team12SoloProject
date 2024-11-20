@@ -71,4 +71,27 @@ public class Utils
             _ => Color.white,
         };
     }
+    
+    public static string GetFileSize(long byteCnt)
+    {
+        string size = "0 Bytes";
+        if (byteCnt >= 1073741824.0) // 1GB
+        {
+            size = string.Format("{0:##.##}", byteCnt / 1073741824.0) + " GB";
+        }
+        else if (byteCnt >= 1048576.0) // 1MB
+        {
+            size = string.Format("{0:##.##}", byteCnt / 1048576.0) + " MB";
+        }
+        else if (byteCnt >= 1024.0) // 1KB
+        {
+            size = string.Format("{0:##.##}", byteCnt / 1024.0) + " KB";
+        }
+        else if (byteCnt > 0 && byteCnt < 1024.0)
+        {
+            size = byteCnt.ToString() + " Bytes";
+        }
+    
+        return size;
+    }
 }
