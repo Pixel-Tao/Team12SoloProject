@@ -14,7 +14,6 @@ public class TitleScene : SceneBase
         // 2. 씬 로드가 완료된 후 필요한 로직을 수행
         
         
-        Managers.UI.LoadSceneUI<UITitleScene>();
     }
     protected override void OnSceneUnload()
     {

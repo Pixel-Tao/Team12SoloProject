@@ -14,7 +14,7 @@ public class ResourceDownloader : InitBase
     /// bool : 초기화 성공 여부
     /// long : 다운로드 크기
     /// </summary>
-    public event Action<bool, long> OnInitAddressableCompleted;
+    public event Action<string[], bool, long> OnInitAddressableCompleted;
     /// <summary>
     /// 다운로드 진행 이벤트 params
     /// long : 현재 다운로드 크기
@@ -85,10 +85,10 @@ public class ResourceDownloader : InitBase
     
         if (patchSize > decimal.Zero)
         {
-            OnInitAddressableCompleted?.Invoke(true, patchSize);
+            OnInitAddressableCompleted?.Invoke(labels, true, patchSize);
         }
         else
-            OnInitAddressableCompleted?.Invoke(false, 0);
+            OnInitAddressableCompleted?.Invoke(labels, false, 0);
     }
     
     

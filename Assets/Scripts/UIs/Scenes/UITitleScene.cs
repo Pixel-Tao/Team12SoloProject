@@ -14,7 +14,7 @@ public class UITitleScene : UISceneBase
     {
         resourceDownloader = gameObject.GetOrAddComponent<ResourceDownloader>();
         resourceDownloader.OnInitAddressableCompleted += AddressableCompleted;
-        resourceDownloader.InitAddressableAsync();
+        resourceDownloader.InitAddressableAsync(Defines.ADDRESSABLE_LABELS);
     }
 
     protected override bool Init()
@@ -37,7 +37,7 @@ public class UITitleScene : UISceneBase
     
     
 
-    private void AddressableCompleted(bool needUpdate, long patchSize)
+    private void AddressableCompleted(string[] labels, bool needUpdate, long patchSize)
     {
         if (needUpdate)
         {
@@ -46,11 +46,14 @@ public class UITitleScene : UISceneBase
             resourceDownloader.OnDownloadProgress += Downloading;
             resourceDownloader.OnDownloadCompleted += DownloadCompleted;
             resourceDownloader.Download();
+            Debug.Log("need to update and download start!");
         }
         else
         {
             // 업데이트가 필요하지 않는 경우
             // TODO : UI 처리
+            Debug.Log("No need to update");
+            DownloadCompleted(labels);
         }        
     }
     
@@ -82,4 +85,5 @@ public class UITitleScene : UISceneBase
     {
         return $"<color=#00FFFF>Downloading...</color> {Utils.GetFileSize(totalSize)}";
     }
+
 }

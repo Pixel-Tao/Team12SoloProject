@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DBManager : IManager
 {
-    private const string dataListDirPath = "SO/DataList";
+    private const string dataListDirPath = "DataList";
 
     private Dictionary<int, EntityBase> itemDb = new Dictionary<int, EntityBase>();
     private Dictionary<int, EntityBase> monsterDb = new Dictionary<int, EntityBase>();
@@ -22,7 +22,7 @@ public class DBManager : IManager
 
     private T LoadDataList<T>() where T : ScriptableObject
     {
-        T dataList = Resources.Load<T>($"{dataListDirPath}/{typeof(T).Name}");
+        T dataList = Managers.Resource.Load<T>($"{dataListDirPath}/{typeof(T).Name}");
         if (dataList == null)
             Debug.LogError($"Failed to load {nameof(dataListDirPath)}");
         

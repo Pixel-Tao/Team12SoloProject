@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 
 public class SheetToDataList
 {
-    private const string _soDirPath = "Assets/Resources/SO";
+    private const string _soDirPath = "Assets/@Resources/SO";
     private const string _sheetDirName = "Sheets";
     private const string _dataDirName = "DataList";
     

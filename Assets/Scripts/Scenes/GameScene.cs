@@ -14,10 +14,6 @@ public class GameScene : SceneBase
         Managers.UI.LoadSceneUI<UIGameScene>();
 
         Managers.Coroutine.StartCoroutine("Dummy", Dummy());
-        
-        
-        
-        
     }
 
     private IEnumerator Dummy()
