@@ -31,28 +31,28 @@ public class DBManager : IManager
 
     private void LoadItemDb()
     {
-        ItemDataList itemDataList = LoadDataList<ItemDataList>();
-        foreach (ItemEntity itemEntity in itemDataList.ItemList)
-            itemDb.Add(itemEntity.id, itemEntity);
-        
-        Debug.Log($"Item Loaded Count : {itemDb.Count}");
+        // ItemDataList itemDataList = LoadDataList<ItemDataList>();
+        // foreach (ItemEntity itemEntity in itemDataList.ItemList)
+        //     itemDb.Add(itemEntity.id, itemEntity);
+        //
+        // Debug.Log($"Item Loaded Count : {itemDb.Count}");
     }
     private void LoadMonsterDb()
     {
-        MonsterDataList monsterDataList = LoadDataList<MonsterDataList>();
-        foreach (MonsterEntity monsterEntity in monsterDataList.MonsterList)
-            monsterDb.Add(monsterEntity.id, monsterEntity);
-        
-        Debug.Log($"Monster Loaded Count : {monsterDb.Count}");
+        // MonsterDataList monsterDataList = LoadDataList<MonsterDataList>();
+        // foreach (MonsterEntity monsterEntity in monsterDataList.MonsterList)
+        //     monsterDb.Add(monsterEntity.id, monsterEntity);
+        //
+        // Debug.Log($"Monster Loaded Count : {monsterDb.Count}");
     }
     
     private void LoadShopDb()
     {
-        ShopDataList shopDataList = LoadDataList<ShopDataList>();
-        foreach (ShopEntity shopEntity in shopDataList.ShopList)
-            shopDb.Add(shopEntity.id, shopEntity);
-        
-        Debug.Log($"Shop Loaded Count : {shopDb.Count}");
+        // ShopDataList shopDataList = LoadDataList<ShopDataList>();
+        // foreach (ShopEntity shopEntity in shopDataList.ShopList)
+        //     shopDb.Add(shopEntity.id, shopEntity);
+        //
+        // Debug.Log($"Shop Loaded Count : {shopDb.Count}");
     }
 
     public T Get<T>(int id) where T : EntityBase
