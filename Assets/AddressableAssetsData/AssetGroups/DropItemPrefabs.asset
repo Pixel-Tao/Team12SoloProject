@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: DropItemPrefabs
+  m_EditorClassIdentifier: 
+  m_GroupName: DropItemPrefabs
+  m_Data:
+    m_SerializedData: []
+  m_GUID: cf1f50496a3b0fb4191b94e324cb2168
+  m_SerializeEntries:
+  - m_GUID: c36dde8a51f5e364f8e4277e4bcf3a4d
+    m_Address: Prefab_DropItem_Potion
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 24d62769fa547ff4c8b5f760ff288786
+    m_Address: Prefab_DropItem_Accessory
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a1a616e93cb5f9418e4c7305744f3e2
+    m_Address: Prefab_DropItem_Armor
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2096de30c7f2b284c927fc6c164d7767
+    m_Address: Prefab_DropItem_Gold
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 515eca29b1f5d214583d67ce81feb35d
+    m_Address: Prefab_DropItem_Weapon
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 40e4945c5218a6142894dac7841b2ab6, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: ea5b57fd270610a4ba3f55055fbc1329, type: 2}
+    - {fileID: 11400000, guid: 7a37949e0ea6d9f4c8c8ed7e715412b2, type: 2}

@@ -1,0 +1,52 @@
+{
+  "Items": [
+    {
+      "key": 100001,
+      "itemId": 1001,
+      "consumeType": 0,
+      "amount": 1.5,
+      "duration": 0.0,
+      "calcType": 2
+    },
+    {
+      "key": 100002,
+      "itemId": 1002,
+      "consumeType": 1,
+      "amount": 1.5,
+      "duration": 0.0,
+      "calcType": 2
+    },
+    {
+      "key": 100003,
+      "itemId": 1003,
+      "consumeType": 2,
+      "amount": 1.2,
+      "duration": 60.0,
+      "calcType": 2
+    },
+    {
+      "key": 100004,
+      "itemId": 1004,
+      "consumeType": 3,
+      "amount": 1.2,
+      "duration": 60.0,
+      "calcType": 2
+    },
+    {
+      "key": 100005,
+      "itemId": 1005,
+      "consumeType": 4,
+      "amount": 1.2,
+      "duration": 60.0,
+      "calcType": 2
+    },
+    {
+      "key": 100006,
+      "itemId": 1006,
+      "consumeType": 5,
+      "amount": 1.2,
+      "duration": 60.0,
+      "calcType": 2
+    }
+  ]
+}

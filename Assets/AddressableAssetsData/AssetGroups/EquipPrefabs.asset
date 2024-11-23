@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: EquipPrefabs
+  m_EditorClassIdentifier: 
+  m_GroupName: EquipPrefabs
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 8024331bbaa875346a3ca45e3830c8c3
+  m_SerializeEntries:
+  - m_GUID: c8cd378cbfe42184ca779a1f2b897369
+    m_Address: Prefab_Equip_Accessory
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90a3a0fd344638049a759d1b79702316
+    m_Address: Prefab_Equip_Armor
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1172f53ebd19e264fae4d3610f94a5b7
+    m_Address: Prefab_Equip_Weapon
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 40e4945c5218a6142894dac7841b2ab6, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 2f70c8f5278be7e46bcac76ae6010dae, type: 2}
+    - {fileID: 11400000, guid: d24f1133c255b04499502cbca3b072f7, type: 2}

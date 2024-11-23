@@ -53,22 +53,22 @@ public class UIShopPopup : UIPopupBase
 
     public void SetData(int shopId)
     {
-        ShopEntity shop = Managers.DB.Get<ShopEntity>(shopId);
-        GetText(Texts.ShopTitleText).text = shop.displayTitle;
-        UpdateGold(Managers.User.CarriedGold);
-
-        int index = 0;
-        foreach (var sale in shop.shopSaleEntities)
-        {
-            ItemEntity item = Managers.DB.Get<ItemEntity>(sale.itemId);
-            AddOrUpdateItemSlot(index, item, sale);
-            index++;
-        }
-
-        for (int i = index; i < slots.Count; i++)
-        {
-            slots[i].gameObject.SetActive(false);
-        }
+        // ShopEntity shop = Managers.DB.Get<ShopEntity>(shopId);
+        // GetText(Texts.ShopTitleText).text = shop.displayTitle;
+        // UpdateGold(Managers.User.CarriedGold);
+        //
+        // int index = 0;
+        // foreach (var sale in shop.shopSaleEntities)
+        // {
+        //     ItemEntity item = Managers.DB.Get<ItemEntity>(sale.itemId);
+        //     AddOrUpdateItemSlot(index, item, sale);
+        //     index++;
+        // }
+        //
+        // for (int i = index; i < slots.Count; i++)
+        // {
+        //     slots[i].gameObject.SetActive(false);
+        // }
     }
 
     private void UpdateGold(long gold)
@@ -76,19 +76,19 @@ public class UIShopPopup : UIPopupBase
         GetText(Texts.CarriedGoldText).text = $"{gold:#,##0} G";
     }
 
-    private void AddOrUpdateItemSlot(int index, ItemEntity item, ShopSaleEntity sale)
-    {
-        if (index >= slots.Count)
-        {
-            GameObject go = Managers.Resource.Instantiate("UI/Slot/UIShopItemSlot", GetObject(GameObjects.ShopItemList).transform);
-            UIShopItemSlot slot = go.GetOrAddComponent<UIShopItemSlot>();
-            slot.SetData(item, sale);
-            slots.Add(slot);
-        }
-        else
-        {
-            slots[index].SetData(item, sale);
-            slots[index].gameObject.SetActive(true);
-        }
-    }
+    // private void AddOrUpdateItemSlot(int index, ItemEntity item, ShopSaleEntity sale)
+    // {
+    //     if (index >= slots.Count)
+    //     {
+    //         GameObject go = Managers.Resource.Instantiate("UI/Slot/UIShopItemSlot", GetObject(GameObjects.ShopItemList).transform);
+    //         UIShopItemSlot slot = go.GetOrAddComponent<UIShopItemSlot>();
+    //         slot.SetData(item, sale);
+    //         slots.Add(slot);
+    //     }
+    //     else
+    //     {
+    //         slots[index].SetData(item, sale);
+    //         slots[index].gameObject.SetActive(true);
+    //     }
+    // }
 }

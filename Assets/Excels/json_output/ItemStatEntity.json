@@ -1,0 +1,186 @@
+{
+  "Items": [
+    {
+      "key": 120001,
+      "itemId": 1501,
+      "statType": 0,
+      "amount": 10.0,
+      "calcType": 1
+    },
+    {
+      "key": 120002,
+      "itemId": 1502,
+      "statType": 0,
+      "amount": 30.0,
+      "calcType": 1
+    },
+    {
+      "key": 120003,
+      "itemId": 1503,
+      "statType": 0,
+      "amount": 50.0,
+      "calcType": 1
+    },
+    {
+      "key": 120004,
+      "itemId": 1503,
+      "statType": 1,
+      "amount": 1.1,
+      "calcType": 2
+    },
+    {
+      "key": 120005,
+      "itemId": 1504,
+      "statType": 0,
+      "amount": 100.0,
+      "calcType": 1
+    },
+    {
+      "key": 120006,
+      "itemId": 1504,
+      "statType": 1,
+      "amount": 1.5,
+      "calcType": 2
+    },
+    {
+      "key": 120007,
+      "itemId": 1601,
+      "statType": 2,
+      "amount": 5.0,
+      "calcType": 1
+    },
+    {
+      "key": 120008,
+      "itemId": 1602,
+      "statType": 2,
+      "amount": 15.0,
+      "calcType": 1
+    },
+    {
+      "key": 120009,
+      "itemId": 1603,
+      "statType": 2,
+      "amount": 30.0,
+      "calcType": 1
+    },
+    {
+      "key": 120010,
+      "itemId": 1603,
+      "statType": 5,
+      "amount": 1.2,
+      "calcType": 2
+    },
+    {
+      "key": 120011,
+      "itemId": 1604,
+      "statType": 2,
+      "amount": 50.0,
+      "calcType": 1
+    },
+    {
+      "key": 120012,
+      "itemId": 1604,
+      "statType": 5,
+      "amount": 1.5,
+      "calcType": 2
+    },
+    {
+      "key": 120013,
+      "itemId": 1604,
+      "statType": 3,
+      "amount": 1.5,
+      "calcType": 2
+    },
+    {
+      "key": 120014,
+      "itemId": 1701,
+      "statType": 3,
+      "amount": 1.2,
+      "calcType": 2
+    },
+    {
+      "key": 120015,
+      "itemId": 1701,
+      "statType": 4,
+      "amount": 1.2,
+      "calcType": 2
+    },
+    {
+      "key": 120016,
+      "itemId": 1702,
+      "statType": 3,
+      "amount": 1.5,
+      "calcType": 2
+    },
+    {
+      "key": 120017,
+      "itemId": 1702,
+      "statType": 4,
+      "amount": 1.5,
+      "calcType": 2
+    },
+    {
+      "key": 120018,
+      "itemId": 1703,
+      "statType": 3,
+      "amount": 2.0,
+      "calcType": 2
+    },
+    {
+      "key": 120019,
+      "itemId": 1703,
+      "statType": 4,
+      "amount": 2.0,
+      "calcType": 2
+    },
+    {
+      "key": 120020,
+      "itemId": 1703,
+      "statType": 1,
+      "amount": 1.2,
+      "calcType": 2
+    },
+    {
+      "key": 120021,
+      "itemId": 1704,
+      "statType": 3,
+      "amount": 2.5,
+      "calcType": 2
+    },
+    {
+      "key": 120022,
+      "itemId": 1704,
+      "statType": 4,
+      "amount": 2.5,
+      "calcType": 2
+    },
+    {
+      "key": 120023,
+      "itemId": 1704,
+      "statType": 0,
+      "amount": 1.5,
+      "calcType": 2
+    },
+    {
+      "key": 120024,
+      "itemId": 1704,
+      "statType": 1,
+      "amount": 1.5,
+      "calcType": 2
+    },
+    {
+      "key": 120025,
+      "itemId": 1704,
+      "statType": 5,
+      "amount": 1.5,
+      "calcType": 2
+    },
+    {
+      "key": 120026,
+      "itemId": 1704,
+      "statType": 2,
+      "amount": 1.5,
+      "calcType": 2
+    }
+  ]
+}

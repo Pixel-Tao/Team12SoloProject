@@ -1,0 +1,76 @@
+{
+  "Items": [
+    {
+      "key": 110001,
+      "itemId": 1501,
+      "equipmentType": 0,
+      "equipedPrefabName": "Prefab_Equip_Weapon"
+    },
+    {
+      "key": 110002,
+      "itemId": 1502,
+      "equipmentType": 0,
+      "equipedPrefabName": "Prefab_Equip_Weapon"
+    },
+    {
+      "key": 110003,
+      "itemId": 1503,
+      "equipmentType": 0,
+      "equipedPrefabName": "Prefab_Equip_Weapon"
+    },
+    {
+      "key": 110004,
+      "itemId": 1504,
+      "equipmentType": 0,
+      "equipedPrefabName": "Prefab_Equip_Weapon"
+    },
+    {
+      "key": 110005,
+      "itemId": 1601,
+      "equipmentType": 1,
+      "equipedPrefabName": "Prefab_Equip_Armor"
+    },
+    {
+      "key": 110006,
+      "itemId": 1602,
+      "equipmentType": 1,
+      "equipedPrefabName": "Prefab_Equip_Armor"
+    },
+    {
+      "key": 110007,
+      "itemId": 1603,
+      "equipmentType": 1,
+      "equipedPrefabName": "Prefab_Equip_Armor"
+    },
+    {
+      "key": 110008,
+      "itemId": 1604,
+      "equipmentType": 1,
+      "equipedPrefabName": "Prefab_Equip_Armor"
+    },
+    {
+      "key": 110009,
+      "itemId": 1701,
+      "equipmentType": 2,
+      "equipedPrefabName": "Prefab_Equip_Accessory"
+    },
+    {
+      "key": 110010,
+      "itemId": 1702,
+      "equipmentType": 2,
+      "equipedPrefabName": "Prefab_Equip_Accessory"
+    },
+    {
+      "key": 110011,
+      "itemId": 1703,
+      "equipmentType": 2,
+      "equipedPrefabName": "Prefab_Equip_Accessory"
+    },
+    {
+      "key": 110012,
+      "itemId": 1704,
+      "equipmentType": 2,
+      "equipedPrefabName": "Prefab_Equip_Accessory"
+    }
+  ]
+}

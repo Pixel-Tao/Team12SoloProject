@@ -69,12 +69,29 @@ public class UITitleScene : UISceneBase
         Managers.Resource.LoadAllAsync<UObject>(labels, (label, key, count, totalCount) =>
         {
             float ratio = count / (float)totalCount;
-        
+            
+            if (count >= totalCount)
+            {
+                Debug.Log("Download Completed");
+                
+            
+                Managers.DB.Init();
+                Managers.Sound.Init();
+                Managers.Sound.PlayBGM("Sounds/BGM/BGM.wav");
+            
+                Invoke("SetVolume", 10f);
+                Managers.Sound.SetMasterVolume(1f);
+            }
             Debug.Log($"label: {label}, key: {key}, count: {count}, totalCount: {totalCount}, ratio: {ratio}");
             
         });
     }
-    
+
+    private void SetVolume()
+    {
+        Debug.Log("SetVolume");
+        Managers.Sound.SetMasterVolume(0.1f);
+    }
     
     private string LoadingMessage(int count, int total, string message)
     {

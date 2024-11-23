@@ -4,9 +4,10 @@ using UnityEngine.Audio;
 
 public class SoundManager : IManager
 {
-    // private Dictionary<string, AudioClip> sfxClips = new Dictionary<string, AudioClip>();
-    // private Dictionary<string, AudioClip> bgmClips = new Dictionary<string, AudioClip>();
-
+    private readonly string SFX_KEY = "SFX";
+    private readonly string BGM_KEY = "BGM";
+    private readonly string MASTER_KEY = "MASTER";
+    
     private AudioSource _bgmSource;
     public AudioSource BgmSource
     {
@@ -39,21 +40,6 @@ public class SoundManager : IManager
         
         initialized = true;
         masterMixer = Managers.Resource.Load<AudioMixer>("Sounds/MasterMixer");
-        // AudioClip[] bgms = Managers.Resource.LoadAll<AudioClip>("Sounds/BGM");
-        //
-        // foreach (var clip in bgms)
-        //     bgmClips.Add(clip.name, clip);
-        //
-        // Debug.Log($"BGM Loaded Count : {bgmClips.Count}");
-        //
-        // AudioClip[] sfxs = Managers.Resource.LoadAll<AudioClip>("Sounds/SFX");
-        //
-        // foreach (var clip in sfxs)
-        //     sfxClips.Add(clip.name, clip);
-        //
-        // Debug.Log($"SFX Loaded Count : {sfxClips.Count}");
-        //
-
         var sfxGroup = masterMixer?.FindMatchingGroups("SFX")[0];
         // AudioSource 풀 생성
         audioSourcePool = new AudioSourcePool(
@@ -61,6 +47,10 @@ public class SoundManager : IManager
             defaultCapacity: defaultCapacity,
             maxSize: maxSize
         );
+        
+        SetSFXVolume(PlayerPrefs.GetFloat(SFX_KEY, 1));
+        SetBGMVolume(PlayerPrefs.GetFloat(BGM_KEY, 1));
+        SetMasterVolume(PlayerPrefs.GetFloat(MASTER_KEY, 1));
     }
     public void Clear()
     {
@@ -127,6 +117,16 @@ public class SoundManager : IManager
     {
         if (masterMixer == null) return;
         masterMixer.SetFloat("Master", LinearToDecibel(volume));
+    }
+    
+    public void SaveVolume()
+    {
+        if (masterMixer.GetFloat("SFX", out float sfxVolume))
+            PlayerPrefs.SetFloat(SFX_KEY, sfxVolume);
+        if (masterMixer.GetFloat("BGM", out float bgmVolume))
+            PlayerPrefs.SetFloat(BGM_KEY, bgmVolume);
+        if (masterMixer.GetFloat("Master", out float masterVolume))
+            PlayerPrefs.SetFloat(MASTER_KEY, masterVolume);
     }
 
     private float LinearToDecibel(float linear)

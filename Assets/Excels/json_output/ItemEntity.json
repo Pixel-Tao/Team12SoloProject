@@ -1,0 +1,202 @@
+{
+  "Items": [
+    {
+      "key": 1001,
+      "displayTitle": "HP 회복 물약",
+      "description": "HP 회복 물약",
+      "itemType": 0,
+      "rarityType": 0,
+      "dropPrefabName": "Prefab_DropItem_Potion",
+      "iconName": "Texture_Status/status_0"
+    },
+    {
+      "key": 1002,
+      "displayTitle": "MP 회복 물약",
+      "description": "MP 회복 물약",
+      "itemType": 0,
+      "rarityType": 0,
+      "dropPrefabName": "Prefab_DropItem_Potion",
+      "iconName": "Texture_Status/status_1"
+    },
+    {
+      "key": 1003,
+      "displayTitle": "이동 속도 상승 물약",
+      "description": "이동 속도를 비약적으로 상승",
+      "itemType": 0,
+      "rarityType": 1,
+      "dropPrefabName": "Prefab_DropItem_Potion",
+      "iconName": "Texture_Status/status_2"
+    },
+    {
+      "key": 1004,
+      "displayTitle": "공격 속도 상승 물약",
+      "description": "공격 속도를 비약적으로 상승",
+      "itemType": 0,
+      "rarityType": 1,
+      "dropPrefabName": "Prefab_DropItem_Potion",
+      "iconName": "Texture_Status/status_3"
+    },
+    {
+      "key": 1005,
+      "displayTitle": "공격력 상승 물약",
+      "description": "공격력을 비약적으로 상승",
+      "itemType": 0,
+      "rarityType": 1,
+      "dropPrefabName": "Prefab_DropItem_Potion",
+      "iconName": "Texture_Status/status_4"
+    },
+    {
+      "key": 1006,
+      "displayTitle": "최대 HP 상승 물약",
+      "description": "최대 HP를 비약적으로 상승",
+      "itemType": 0,
+      "rarityType": 1,
+      "dropPrefabName": "Prefab_DropItem_Potion",
+      "iconName": "Texture_Status/status_5"
+    },
+    {
+      "key": 1201,
+      "displayTitle": "Gold",
+      "description": "골드를 난이도에 비례해서 획득",
+      "itemType": 1,
+      "rarityType": 0,
+      "dropPrefabName": "Prefab_DropItem_Gold",
+      "iconName": "Texture_Status/status_6"
+    },
+    {
+      "key": 1202,
+      "displayTitle": "Gold x10",
+      "description": "골드를 난이도에 비례해서 10배 획득",
+      "itemType": 1,
+      "rarityType": 1,
+      "dropPrefabName": "Prefab_DropItem_Gold",
+      "iconName": "Texture_Status/status_7"
+    },
+    {
+      "key": 1203,
+      "displayTitle": "Gold x50",
+      "description": "골드를 난이도에 비례해서 50배 획득",
+      "itemType": 1,
+      "rarityType": 2,
+      "dropPrefabName": "Prefab_DropItem_Gold",
+      "iconName": "Texture_Status/status_8"
+    },
+    {
+      "key": 1204,
+      "displayTitle": "Gold x100",
+      "description": "골드를 난이도에 비례해서 100배 획득",
+      "itemType": 1,
+      "rarityType": 3,
+      "dropPrefabName": "Prefab_DropItem_Gold",
+      "iconName": "Texture_Status/status_9"
+    },
+    {
+      "key": 1501,
+      "displayTitle": "목검",
+      "description": "나무 검",
+      "itemType": 2,
+      "rarityType": 0,
+      "dropPrefabName": "Prefab_DropItem_Weapon",
+      "iconName": "Texture_Status/status_10"
+    },
+    {
+      "key": 1502,
+      "displayTitle": "철검",
+      "description": "철로 만든 튼튼한 검",
+      "itemType": 2,
+      "rarityType": 1,
+      "dropPrefabName": "Prefab_DropItem_Weapon",
+      "iconName": "Texture_Status/status_11"
+    },
+    {
+      "key": 1503,
+      "displayTitle": "미스릴 검",
+      "description": "미스릴로 만든 엄청난 검",
+      "itemType": 2,
+      "rarityType": 2,
+      "dropPrefabName": "Prefab_DropItem_Weapon",
+      "iconName": "Texture_Status/status_12"
+    },
+    {
+      "key": 1504,
+      "displayTitle": "스파르타의 검",
+      "description": "과거 버틴자만이 사용 가능했던 무시무시한 검",
+      "itemType": 2,
+      "rarityType": 3,
+      "dropPrefabName": "Prefab_DropItem_Weapon",
+      "iconName": "Texture_Status/status_13"
+    },
+    {
+      "key": 1601,
+      "displayTitle": "가죽 갑옷",
+      "description": "가죽으로 만든 갑옷",
+      "itemType": 2,
+      "rarityType": 0,
+      "dropPrefabName": "Prefab_DropItem_Armor",
+      "iconName": "Texture_Status/status_14"
+    },
+    {
+      "key": 1602,
+      "displayTitle": "사슬 갑옷",
+      "description": "사슬로 만든 튼튼한 갑옷",
+      "itemType": 2,
+      "rarityType": 1,
+      "dropPrefabName": "Prefab_DropItem_Armor",
+      "iconName": "Texture_Status/status_15"
+    },
+    {
+      "key": 1603,
+      "displayTitle": "미스릴 갑옷",
+      "description": "미스릴로 만든 엄청난 갑옷",
+      "itemType": 2,
+      "rarityType": 2,
+      "dropPrefabName": "Prefab_DropItem_Armor",
+      "iconName": "Texture_Status/status_16"
+    },
+    {
+      "key": 1604,
+      "displayTitle": "스파르타의 거적대기",
+      "description": "과거 버틴자만이 사용 가능했던 무시무시한 거적대기",
+      "itemType": 2,
+      "rarityType": 3,
+      "dropPrefabName": "Prefab_DropItem_Armor",
+      "iconName": "Texture_Status/status_17"
+    },
+    {
+      "key": 1701,
+      "displayTitle": "나무 반지",
+      "description": "나무로 만든 반지",
+      "itemType": 2,
+      "rarityType": 0,
+      "dropPrefabName": "Prefab_DropItem_Accessory",
+      "iconName": "Texture_Status/status_18"
+    },
+    {
+      "key": 1702,
+      "displayTitle": "은반지",
+      "description": "은으로 만든 가벼운 반지",
+      "itemType": 2,
+      "rarityType": 1,
+      "dropPrefabName": "Prefab_DropItem_Accessory",
+      "iconName": "Texture_Status/status_19"
+    },
+    {
+      "key": 1703,
+      "displayTitle": "미스릴 반지",
+      "description": "미스릴로 만든 엄청난 반지",
+      "itemType": 2,
+      "rarityType": 2,
+      "dropPrefabName": "Prefab_DropItem_Accessory",
+      "iconName": "Texture_Status/status_20"
+    },
+    {
+      "key": 1704,
+      "displayTitle": "스파르타의 반지",
+      "description": "과거 버틴자만이 사용 가능했던 반지",
+      "itemType": 2,
+      "rarityType": 3,
+      "dropPrefabName": "Prefab_DropItem_Accessory",
+      "iconName": "Texture_Status/status_21"
+    }
+  ]
+}

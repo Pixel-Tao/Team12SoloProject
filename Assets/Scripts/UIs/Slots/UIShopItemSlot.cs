@@ -37,16 +37,16 @@ public class UIShopItemSlot : UISlotBase
         return true;
     }
 
-    public void SetData(ItemEntity item, ShopSaleEntity sale)
-    {
-        this.id = item.id;
-        this.price = sale.price;
-        
-        GetText(Texts.ItemTitleText).text = item.displayTitle;
-        GetText(Texts.ItemDescriptionText).text = item.description;
-        GetText(Texts.ItemPriceText).text = $"{sale.price:#,##0} G";
-
-        GetImage(Images.ItemIconImage).sprite = Managers.Resource.Load<Sprite>(item.iconPath);
-        GetImage(Images.ItemRarityImage).color = Utils.GetItemRarityColor(item.rarityType);
-    }
+    // public void SetData(ItemEntity item, ShopSaleEntity sale)
+    // {
+    //     this.id = item.id;
+    //     this.price = sale.price;
+    //     
+    //     GetText(Texts.ItemTitleText).text = item.displayTitle;
+    //     GetText(Texts.ItemDescriptionText).text = item.description;
+    //     GetText(Texts.ItemPriceText).text = $"{sale.price:#,##0} G";
+    //
+    //     GetImage(Images.ItemIconImage).sprite = Managers.Resource.Load<Sprite>(item.iconPath);
+    //     GetImage(Images.ItemRarityImage).color = Utils.GetItemRarityColor(item.rarityType);
+    // }
 }

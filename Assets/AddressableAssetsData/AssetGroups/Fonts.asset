@@ -17,8 +17,14 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 247d8f00e54ef4e46a6f1d655ed44101
   m_SerializeEntries:
-  - m_GUID: d94a9eea6bd119c43be2f5b8be9af7f1
-    m_Address: Fonts
+  - m_GUID: 2331044bf8170b444ac8397fe0e84809
+    m_Address: NEXONLv1GothicRegular
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 32896cb0a2fb34b48853be61a4f1eab3
+    m_Address: NEXONLv1GothicRegular SDF
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI_Prefabs
+  m_EditorClassIdentifier: 
+  m_GroupName: UI_Prefabs
+  m_Data:
+    m_SerializedData: []
+  m_GUID: b35256601674fb847a9e7b07957370e9
+  m_SerializeEntries:
+  - m_GUID: 52cfd678024840c4280484bd291c454a
+    m_Address: UIMyPopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa8f35aec9c41f948ae76e73983eae15
+    m_Address: UIShopPopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 524651e4143ff4d4a9a601c194d4637e
+    m_Address: UIGameScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a34ff9037c9a356448dd9df19ba1cc67
+    m_Address: UITitleScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e77eeb3bd08f234f92b6a7c06804099
+    m_Address: UIShopItemSlot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 40e4945c5218a6142894dac7841b2ab6, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 887b4604b084c4d49941ce9fac9a3f2b, type: 2}
+    - {fileID: 11400000, guid: af9e12c54363d754da57bf22096ad1d7, type: 2}

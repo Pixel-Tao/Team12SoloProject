@@ -4,10 +4,7 @@ using UnityEngine;
 public class DBManager : IManager
 {
     private const string dataListDirPath = "DataList";
-
-    private Dictionary<int, EntityBase> itemDb = new Dictionary<int, EntityBase>();
-    private Dictionary<int, EntityBase> monsterDb = new Dictionary<int, EntityBase>();
-    private Dictionary<int, EntityBase> shopDb = new Dictionary<int, EntityBase>();
+    
 
     public void Init()
     {
@@ -53,42 +50,5 @@ public class DBManager : IManager
         //     shopDb.Add(shopEntity.id, shopEntity);
         //
         // Debug.Log($"Shop Loaded Count : {shopDb.Count}");
-    }
-
-    public T Get<T>(int id) where T : EntityBase
-    {
-        if (typeof(T) == typeof(ItemEntity))
-        {
-            if (itemDb.TryGetValue(id, out EntityBase value))
-            {
-                return value as T;
-            }
-        }
-        else if (typeof(T) == typeof(MonsterEntity))
-        {
-            if (monsterDb.TryGetValue(id, out EntityBase value))
-            {
-                return value as T;
-            }
-        }
-        else if (typeof(T) == typeof(ShopEntity))
-        {
-            if (shopDb.TryGetValue(id, out EntityBase value))
-            {
-                return value as T;
-            }
-        }
-
-        return null;
-    }
-    
-    public int Count<T>() where T : EntityBase
-    {
-        if (typeof(T) == typeof(ItemEntity))
-            return itemDb.Count;
-        else if (typeof(T) == typeof(MonsterEntity))
-            return monsterDb.Count;
-
-        return 0;
     }
 }
