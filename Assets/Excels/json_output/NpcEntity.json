@@ -1,0 +1,48 @@
+{
+  "Items": [
+    {
+      "key": 51001,
+      "displayTitle": "잡화 상인",
+      "description": "물약이나 잡화를 구매할 수 있다.",
+      "imageName": "Texture_Shop_Npc",
+      "prefabName": "Prefab_Npc_Shop",
+      "dialogueIds": [
+        9001000,
+        9001001
+      ]
+    },
+    {
+      "key": 51002,
+      "displayTitle": "무기 상인",
+      "description": "무기만 파는 상인",
+      "imageName": "Texture_Shop_Npc",
+      "prefabName": "Prefab_Npc_Shop",
+      "dialogueIds": [
+        9001000,
+        9001001
+      ]
+    },
+    {
+      "key": 51003,
+      "displayTitle": "방어구 상인",
+      "description": "방어구만 파는 상인",
+      "imageName": "Texture_Shop_Npc",
+      "prefabName": "Prefab_Npc_Shop",
+      "dialogueIds": [
+        9001000,
+        9001001
+      ]
+    },
+    {
+      "key": 51004,
+      "displayTitle": "장신구 상인",
+      "description": "장신구만 파는 상인",
+      "imageName": "Texture_Shop_Npc",
+      "prefabName": "Prefab_Npc_Shop",
+      "dialogueIds": [
+        9001000,
+        9001001
+      ]
+    }
+  ]
+}

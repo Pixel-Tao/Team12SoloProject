@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
+using UnityEngine.AddressableAssets;
 using UnityEngine;
 
 [Serializable]
@@ -33,10 +33,13 @@ public class ItemEquipEntityLoader
     public List<ItemEquipEntity> ItemsList { get; private set; }
     public Dictionary<int, ItemEquipEntity> ItemsDict { get; private set; }
 
-    public ItemEquipEntityLoader(string path)
+    public ItemEquipEntityLoader(string path = "ItemEquipEntity")
     {
-        string jsonData;
-        jsonData = File.ReadAllText(path);
+        Addressables.LoadAssetAsync<TextAsset>(path).Completed += handle => { AddDatas(handle.Result.text); };
+    }
+
+    private void AddDatas(string jsonData)
+    {
         ItemsList = JsonUtility.FromJson<Wrapper>(jsonData).Items;
         ItemsDict = new Dictionary<int, ItemEquipEntity>();
         foreach (var item in ItemsList)

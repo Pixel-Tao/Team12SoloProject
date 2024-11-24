@@ -16,7 +16,61 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 1f86bc7a62c84bd4aada57514a5c2bd9
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: d1094e944ab6b9747b3ac9b6eb55a92b
+    m_Address: ItemStatEntity
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a344c23872b1cb64f9ec7ef7c24d4698
+    m_Address: ItemEquipEntity
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 905dd68f3760f9d468da328d923ad23e
+    m_Address: DialogueEntity
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e45d984759366444bb4816b55784bff
+    m_Address: ItemEntity
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 439155286aff6f14cb77b4f4dd3e59b1
+    m_Address: DialogueOptionEntity
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88cc510242fd47e47b8ca586e8d612d0
+    m_Address: ItemConsumeEntity
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79ea58e7dca6baa40962af9973ece65f
+    m_Address: NpcEntity
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f7ce6e23631de749b300ff634e6bee2
+    m_Address: ShopSaleEntity
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae85ede909290324291b81247fc082b0
+    m_Address: DialogueLineEntity
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 40e4945c5218a6142894dac7841b2ab6, type: 2}
   m_SchemaSet:

@@ -46,4 +46,12 @@ public static class DesignEnums
         MaxHp = 5,
         MaxMp = 6,
     }
+    public enum NpcInteractionType
+    {
+        Dialogue = 0,
+        Trade = 1,
+        Quest = 2,
+        Crafting = 3,
+        Information = 4,
+    }
 }

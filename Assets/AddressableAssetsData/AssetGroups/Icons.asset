@@ -23,6 +23,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e9c9664430f08b74ab8d9a7f7369ab9d
+    m_Address: Texture_Npc_Shop
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 40e4945c5218a6142894dac7841b2ab6, type: 2}
   m_SchemaSet:

@@ -1,0 +1,112 @@
+{
+  "Items": [
+    {
+      "key": 9110001,
+      "dialogueId": 9110000,
+      "seq": 1,
+      "displaySubTitle": "",
+      "text": "무엇이 필요하신가요?",
+      "options": []
+    },
+    {
+      "key": 9210001,
+      "dialogueId": 9210000,
+      "seq": 1,
+      "displaySubTitle": "",
+      "text": "무엇이든 제작해드립니다.",
+      "options": []
+    },
+    {
+      "key": 9310001,
+      "dialogueId": 9310000,
+      "seq": 1,
+      "displaySubTitle": "",
+      "text": "의뢰를 맡기고 싶습니다.",
+      "options": []
+    },
+    {
+      "key": 9410001,
+      "dialogueId": 9410000,
+      "seq": 1,
+      "displaySubTitle": "",
+      "text": "상호작용 가능한 오브젝트",
+      "options": []
+    },
+    {
+      "key": 9710001,
+      "dialogueId": 9710000,
+      "seq": 1,
+      "displaySubTitle": "???",
+      "text": "안녕하세요.",
+      "options": []
+    },
+    {
+      "key": 9710002,
+      "dialogueId": 9710000,
+      "seq": 2,
+      "displaySubTitle": "???",
+      "text": "오늘은 무엇을 드셨나요?",
+      "options": [
+        9711000,
+        9711001,
+        9711002
+      ]
+    },
+    {
+      "key": 9710003,
+      "dialogueId": 9710000,
+      "seq": 3,
+      "displaySubTitle": "",
+      "text": "김치찌개 하나만 있다면 밥 세 공기는 뚝딱이죠!",
+      "options": []
+    },
+    {
+      "key": 9710004,
+      "dialogueId": 9710000,
+      "seq": 4,
+      "displaySubTitle": "",
+      "text": "다음에 같이 먹읍시다!",
+      "options": []
+    },
+    {
+      "key": 9710005,
+      "dialogueId": 9710000,
+      "seq": 3,
+      "displaySubTitle": "",
+      "text": "짜장면을 드셨군요.",
+      "options": []
+    },
+    {
+      "key": 9710006,
+      "dialogueId": 9710000,
+      "seq": 4,
+      "displaySubTitle": "",
+      "text": "저는 짬뽕이 더 좋습니다.",
+      "options": []
+    },
+    {
+      "key": 9710007,
+      "dialogueId": 9710000,
+      "seq": 3,
+      "displaySubTitle": "",
+      "text": "삼겹살은 정말이지 참을 수 없습니다.",
+      "options": []
+    },
+    {
+      "key": 9710008,
+      "dialogueId": 9710000,
+      "seq": 4,
+      "displaySubTitle": "",
+      "text": "특히 마지막 하이라이트는 볶음밥 아니겠어요?",
+      "options": []
+    },
+    {
+      "key": 9710009,
+      "dialogueId": 9710000,
+      "seq": 5,
+      "displaySubTitle": "",
+      "text": "잘가요!",
+      "options": []
+    }
+  ]
+}

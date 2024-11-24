@@ -58,6 +58,7 @@ public class ExcelToJson
         );
         bool allowMultipleSheets = config.ContainsKey("allowMultipleSheets") && config["allowMultipleSheets"].ToLower() == "true";
         bool useResources = config.ContainsKey("useResources") && config["useResources"].ToLower() == "true";
+        bool useAddressables = config.ContainsKey("useAddressables") && config["useAddressables"].ToLower() == "true";
         string excelDirectoryPath = ValidateOrCreateDirectory(config, $"excelDirectoryPath", defaultExcelDirectoryPath);
         string loaderOutputDirectory = ValidateOrCreateDirectory(config, "loaderOutputDirectory", defaultLoaderOutputDirectory);
         string jsonOutputDirectory = ValidateOrCreateDirectory(config, "jsonOutputDirectory", defaultJsonOutputDirectory);
@@ -85,7 +86,8 @@ public class ExcelToJson
             logFilePath,
             allowMultipleSheets,
             useResources,
-            resourcesInternalPath
+            resourcesInternalPath,
+            useAddressables
         );
 
         if (useResources)
@@ -142,7 +144,10 @@ public class ExcelToJson
             config["loaderOutputDirectory"] = "Excels/loader_output";
             config["jsonOutputDirectory"] = "Excels/json_output";
             config["allowMultipleSheets"] = "false";
+            config["useResources"] = "true";
+            config["resourcesInternalPath"] = "JSON";
             config["useAssets"] = "true";
+            config["useAddressables"] = "false";
 
             using (var sw = File.CreateText(configFilePath))
             {
@@ -169,6 +174,9 @@ public class ExcelToJson
 
                 sw.WriteLine("# Assets 사용 설정 (Root 폴더가 Assets인 경우 true)");
                 sw.WriteLine("useAssets=true # Assets 폴더 사용 여부 (true/false)");
+
+                sw.WriteLine("# Addressables 사용 설정 (Addressables를 사용하는 경우 true)");
+                sw.WriteLine("useAddressables=false # Addressables 사용 여부 (true/false)");
             }
 
             AssetDatabase.Refresh();
@@ -305,7 +313,7 @@ public class ExcelToJson
     }
 
     static void ProcessExcelFiles(string excelDir, string loaderDir, string jsonDir, string logFilePath, bool allowMultipleSheets,
-        bool useResources, string resourcesInternalPath)
+        bool useResources, string resourcesInternalPath, bool useAddressables)
     {
         var excelFiles = Directory.GetFiles(excelDir, "*.xlsx");
 
@@ -329,7 +337,8 @@ public class ExcelToJson
                 logFilePath,
                 allowMultipleSheets,
                 useResources,
-                resourcesInternalPath
+                resourcesInternalPath,
+                useAddressables
             );
             if (success)
             {
@@ -349,6 +358,7 @@ public class ExcelToJson
     }
     static string GetCellText(ICell cell)
     {
+        if (cell == null) return null;
         switch (cell.CellType)
         {
             case CellType.Numeric:
@@ -362,13 +372,12 @@ public class ExcelToJson
             case CellType.Unknown:
             case CellType.Error:
             case CellType.Blank:
+            default:
                 return null;
         }
-
-        return null;
     }
     static bool GenerateClassAndJsonFromExcel(string excelPath, string loaderDir, string jsonDir, string logFilePath,
-        bool allowMultipleSheets, bool useResources, string resourcesInternalPath)
+        bool allowMultipleSheets, bool useResources, string resourcesInternalPath, bool useAddressables)
     {
         try
         {
@@ -395,7 +404,7 @@ public class ExcelToJson
                     sb.AppendLine("using System;");
                     sb.AppendLine("using System.Collections.Generic;");
                     sb.AppendLine("using System.IO;");
-                    sb.AppendLine("using UnityEditor;");
+                    if (useAddressables) sb.AppendLine("using UnityEngine.AddressableAssets;");
                     sb.AppendLine("using UnityEngine;");
                     sb.AppendLine();
                     sb.AppendLine($"[Serializable]");
@@ -465,20 +474,33 @@ public class ExcelToJson
                     {
                         sb.AppendLine($"    public {className}Loader(string path = \"{resourcesInternalPath}/{className}.json\")");
                     }
+                    else if (useAddressables)
+                    {
+                        sb.AppendLine($"    public {className}Loader(string path = \"{className}\")");
+                    }
                     else
                     {
                         sb.AppendLine($"    public {className}Loader(string path)");
                     }
                     sb.AppendLine("    {");
-                    sb.AppendLine("        string jsonData;");
                     if (useResources)
                     {
-                        sb.AppendLine("        jsonData = Resources.Load<TextAsset>(path).text;");
+                        sb.AppendLine("        AddDatas(Resources.Load<TextAsset>(path).text);");
+                    }
+                    else if (useAddressables)
+                    {
+                        sb.AppendLine(
+                            "        Addressables.LoadAssetAsync<TextAsset>(path).Completed += handle => { AddDatas(handle.Result.text); };"
+                        );
                     }
                     else
                     {
-                        sb.AppendLine("        jsonData = File.ReadAllText(path);");
+                        sb.AppendLine("        AddDatas(File.ReadAllText(path));");
                     }
+                    sb.AppendLine("    }");
+                    sb.AppendLine();
+                    sb.AppendLine("    private void AddDatas(string jsonData)");
+                    sb.AppendLine("    {");
                     sb.AppendLine("        ItemsList = JsonUtility.FromJson<Wrapper>(jsonData).Items;");
                     sb.AppendLine($"        ItemsDict = new Dictionary<int, {className}>();");
                     sb.AppendLine("        foreach (var item in ItemsList)");
@@ -520,6 +542,7 @@ public class ExcelToJson
 
                     for (int i = 3; i <= worksheet.LastRowNum; i++)
                     {
+                        bool isKeyEmpty = false;
                         var row = worksheet.GetRow(i);
                         var rowDict = new Dictionary<string, object>();
 
@@ -528,6 +551,12 @@ public class ExcelToJson
                             var variableName = headers.ElementAt(j).StringCellValue;
                             var dataType = types.ElementAt(j).StringCellValue;
                             var cellValue = GetCellText(row.GetCell(j));
+
+                            if (variableName == "key" && (string.IsNullOrWhiteSpace(cellValue) || cellValue.StartsWith("#")))
+                            {
+                                isKeyEmpty = true;
+                                break;
+                            }
 
                             var convertedValue = ConvertToType(
                                 cellValue,
@@ -547,8 +576,8 @@ public class ExcelToJson
 
                             rowDict[variableName] = convertedValue;
                         }
-
-                        jsonArray.Add(rowDict);
+                        if (isKeyEmpty == false)
+                            jsonArray.Add(rowDict);
                     }
 
                     var classCode = sb.ToString();
@@ -628,6 +657,8 @@ public class ExcelToJson
                 {
                     case "int":
                         return 0; // 기본값 0
+                    case "long":
+                        return 0L; // 기본값 0
                     case "float":
                         return 0.0f; // 기본값 0.0f
                     case "double":
@@ -649,35 +680,47 @@ public class ExcelToJson
                     throw new Exception($"Enum type '{enumTypeName}' not found in Enum definitions.");
                 }
                 var enumMap = enumMappings[enumTypeName];
-                return value.Split(',').Select(v => enumMap[v.Trim()]).ToList();
+                string listText = value.TrimStart('[').TrimEnd(']');
+                if (string.IsNullOrWhiteSpace(listText)) return Array.Empty<object>();
+                return listText.Split(',').Select(v => enumMap[v.Trim()]).ToList();
             }
             else if (type.StartsWith("List<"))
             {
                 var itemType = type.Substring(5, type.Length - 6);
+                string listText = value.TrimStart('[').TrimEnd(']');
+                if (string.IsNullOrWhiteSpace(listText)) return Array.Empty<object>();
                 if (itemType == "int")
                 {
-                    return value.Split(',').Select(int.Parse).ToList();
+                    return listText.Split(',').Select(int.Parse).ToList();
+                }
+                else if (itemType == "long")
+                {
+                    return listText.Split(',').Select(long.Parse).ToList();
                 }
                 else if (itemType == "float")
                 {
-                    return value.Split(',').Select(float.Parse).ToList();
+                    return listText.Split(',').Select(float.Parse).ToList();
                 }
                 else if (itemType == "double")
                 {
-                    return value.Split(',').Select(double.Parse).ToList();
+                    return listText.Split(',').Select(double.Parse).ToList();
                 }
                 else if (itemType == "bool")
                 {
-                    return value.Split(',').Select(bool.Parse).ToList();
+                    return listText.Split(',').Select(bool.Parse).ToList();
                 }
                 else
                 {
-                    return value.Split(',').Select(v => v.Trim()).ToList();
+                    return listText.Split(',').Select(v => v.Trim()).ToList();
                 }
             }
             else if (type == "int")
             {
                 return int.Parse(value);
+            }
+            else if (type == "long")
+            {
+                return long.Parse(value);
             }
             else if (type == "float")
             {

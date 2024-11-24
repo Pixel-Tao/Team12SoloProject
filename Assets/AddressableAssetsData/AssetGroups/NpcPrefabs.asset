@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: NpcPrefabs
+  m_EditorClassIdentifier: 
+  m_GroupName: NpcPrefabs
+  m_Data:
+    m_SerializedData: []
+  m_GUID: ec45e83c784c7a04396c54bf0d0f60ae
+  m_SerializeEntries:
+  - m_GUID: ce45e544eb555294faddfdbe77c30313
+    m_Address: Prefab_Npc_Shop
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 40e4945c5218a6142894dac7841b2ab6, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 563e4baeaa9a3364ba39ea38eca06c9a, type: 2}
+    - {fileID: 11400000, guid: 375f2f0be2345914fba07346764fb16f, type: 2}
