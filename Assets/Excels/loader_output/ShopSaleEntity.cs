@@ -33,9 +33,9 @@ public class ShopSaleEntityLoader
     public List<ShopSaleEntity> ItemsList { get; private set; }
     public Dictionary<int, ShopSaleEntity> ItemsDict { get; private set; }
 
-    public ShopSaleEntityLoader(string path = "ShopSaleEntity")
+    public ShopSaleEntityLoader(Func<string, TextAsset> loadFunc)
     {
-        Addressables.LoadAssetAsync<TextAsset>(path).Completed += handle => { AddDatas(handle.Result.text); };
+        AddDatas(loadFunc("ShopSaleEntity").text);
     }
 
     private void AddDatas(string jsonData)

@@ -33,9 +33,9 @@ public class DialogueEntityLoader
     public List<DialogueEntity> ItemsList { get; private set; }
     public Dictionary<int, DialogueEntity> ItemsDict { get; private set; }
 
-    public DialogueEntityLoader(string path = "DialogueEntity")
+    public DialogueEntityLoader(Func<string, TextAsset> loadFunc)
     {
-        Addressables.LoadAssetAsync<TextAsset>(path).Completed += handle => { AddDatas(handle.Result.text); };
+        AddDatas(loadFunc("DialogueEntity").text);
     }
 
     private void AddDatas(string jsonData)

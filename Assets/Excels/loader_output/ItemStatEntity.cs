@@ -38,9 +38,9 @@ public class ItemStatEntityLoader
     public List<ItemStatEntity> ItemsList { get; private set; }
     public Dictionary<int, ItemStatEntity> ItemsDict { get; private set; }
 
-    public ItemStatEntityLoader(string path = "ItemStatEntity")
+    public ItemStatEntityLoader(Func<string, TextAsset> loadFunc)
     {
-        Addressables.LoadAssetAsync<TextAsset>(path).Completed += handle => { AddDatas(handle.Result.text); };
+        AddDatas(loadFunc("ItemStatEntity").text);
     }
 
     private void AddDatas(string jsonData)

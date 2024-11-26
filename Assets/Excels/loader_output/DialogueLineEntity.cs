@@ -18,6 +18,11 @@ public class DialogueLineEntity
     public int dialogueId;
 
     /// <summary>
+    /// 선택지 id
+    /// </summary>
+    public int optionId;
+
+    /// <summary>
     /// 대화 순서
     /// </summary>
     public int seq;
@@ -33,6 +38,16 @@ public class DialogueLineEntity
     public string text;
 
     /// <summary>
+    /// 초상화
+    /// </summary>
+    public string portraitSpriteName;
+
+    /// <summary>
+    /// 초상화 좌,우,가운데
+    /// </summary>
+    public DesignEnums.PortraitPositionType portraitPositionType;
+
+    /// <summary>
     /// 대화 선택지
     /// </summary>
     public List<int> options;
@@ -43,9 +58,9 @@ public class DialogueLineEntityLoader
     public List<DialogueLineEntity> ItemsList { get; private set; }
     public Dictionary<int, DialogueLineEntity> ItemsDict { get; private set; }
 
-    public DialogueLineEntityLoader(string path = "DialogueLineEntity")
+    public DialogueLineEntityLoader(Func<string, TextAsset> loadFunc)
     {
-        Addressables.LoadAssetAsync<TextAsset>(path).Completed += handle => { AddDatas(handle.Result.text); };
+        AddDatas(loadFunc("DialogueLineEntity").text);
     }
 
     private void AddDatas(string jsonData)

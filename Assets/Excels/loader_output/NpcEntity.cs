@@ -43,9 +43,9 @@ public class NpcEntityLoader
     public List<NpcEntity> ItemsList { get; private set; }
     public Dictionary<int, NpcEntity> ItemsDict { get; private set; }
 
-    public NpcEntityLoader(string path = "NpcEntity")
+    public NpcEntityLoader(Func<string, TextAsset> loadFunc)
     {
-        Addressables.LoadAssetAsync<TextAsset>(path).Completed += handle => { AddDatas(handle.Result.text); };
+        AddDatas(loadFunc("NpcEntity").text);
     }
 
     private void AddDatas(string jsonData)

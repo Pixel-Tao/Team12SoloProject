@@ -54,4 +54,10 @@ public static class DesignEnums
         Crafting = 3,
         Information = 4,
     }
+    public enum PortraitPositionType
+    {
+        Left = 0,
+        Center = 1,
+        Right = 2,
+    }
 }

@@ -17,20 +17,15 @@ public class DialogueOptionEntity
     /// </summary>
     public string displayTitle;
 
-    /// <summary>
-    /// 다음 대화 ID
-    /// </summary>
-    public int nextDialogueLineId;
-
 }
 public class DialogueOptionEntityLoader
 {
     public List<DialogueOptionEntity> ItemsList { get; private set; }
     public Dictionary<int, DialogueOptionEntity> ItemsDict { get; private set; }
 
-    public DialogueOptionEntityLoader(string path = "DialogueOptionEntity")
+    public DialogueOptionEntityLoader(Func<string, TextAsset> loadFunc)
     {
-        Addressables.LoadAssetAsync<TextAsset>(path).Completed += handle => { AddDatas(handle.Result.text); };
+        AddDatas(loadFunc("DialogueOptionEntity").text);
     }
 
     private void AddDatas(string jsonData)

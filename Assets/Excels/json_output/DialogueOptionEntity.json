@@ -2,18 +2,15 @@
   "Items": [
     {
       "key": 9711000,
-      "displayTitle": "김치찌개",
-      "nextDialogueLineId": 9710003
+      "displayTitle": "김치찌개"
     },
     {
       "key": 9711001,
-      "displayTitle": "짜장면",
-      "nextDialogueLineId": 9710005
+      "displayTitle": "짜장면"
     },
     {
       "key": 9711002,
-      "displayTitle": "삼겹살",
-      "nextDialogueLineId": 9710007
+      "displayTitle": "삼겹살"
     }
   ]
 }

@@ -78,7 +78,7 @@ public class UIManager : IManager
 
         if (popupDict.TryGetValue(name, out UIPopupBase popup) == false)
         {
-            GameObject go = Managers.Resource.Instantiate($"UI/Popup/{name}", Root.transform);
+            GameObject go = Managers.Resource.Instantiate(name, Root.transform);
             if (go == null)
             {
                 Debug.LogError("Failed to load popup : " + name);

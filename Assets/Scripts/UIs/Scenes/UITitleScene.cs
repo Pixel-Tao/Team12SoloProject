@@ -77,10 +77,12 @@ public class UITitleScene : UISceneBase
             
                 Managers.DB.Init();
                 Managers.Sound.Init();
-                Managers.Sound.PlayBGM("Sounds/BGM/BGM.wav");
+                Managers.Sound.PlayBGM("BGM_Title");
             
                 Invoke("SetVolume", 10f);
                 Managers.Sound.SetMasterVolume(1f);
+
+                Managers.UI.ShowPopupUI<UIDialoguePopup>()?.SetData(9710000, "누군가");
             }
             Debug.Log($"label: {label}, key: {key}, count: {count}, totalCount: {totalCount}, ratio: {ratio}");
             

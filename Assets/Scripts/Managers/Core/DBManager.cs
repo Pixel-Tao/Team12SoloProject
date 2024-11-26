@@ -14,19 +14,22 @@ public class DBManager : IManager
     public DialogueEntityLoader DialogueEntityLoader;
     public DialogueOptionEntityLoader DialogueOptionEntityLoader;
     public DialogueLineEntityLoader DialogueLineEntityLoader;
+    private TextAsset LoadJson(string addressableName) => Managers.Resource.Load<TextAsset>(addressableName); 
 
     public void Init()
     {
-        ItemEntityLoader = new ItemEntityLoader();
-        ItemStatEntityLoader = new ItemStatEntityLoader();
-        ItemConsumeEntityLoader = new ItemConsumeEntityLoader();
-        ItemEquipEntityLoader = new ItemEquipEntityLoader();
-        NpcEntityLoader = new NpcEntityLoader();
-        ShopSaleEntityLoader = new ShopSaleEntityLoader();
-        DialogueEntityLoader = new DialogueEntityLoader();
-        DialogueOptionEntityLoader = new DialogueOptionEntityLoader();
-        DialogueLineEntityLoader = new DialogueLineEntityLoader();
+        ItemEntityLoader = new ItemEntityLoader(LoadJson);
+        ItemStatEntityLoader = new ItemStatEntityLoader(LoadJson);
+        ItemConsumeEntityLoader = new ItemConsumeEntityLoader(LoadJson);
+        ItemEquipEntityLoader = new ItemEquipEntityLoader(LoadJson);
+        NpcEntityLoader = new NpcEntityLoader(LoadJson);
+        ShopSaleEntityLoader = new ShopSaleEntityLoader(LoadJson);
+        DialogueEntityLoader = new DialogueEntityLoader(LoadJson);
+        DialogueOptionEntityLoader = new DialogueOptionEntityLoader(LoadJson);
+        DialogueLineEntityLoader = new DialogueLineEntityLoader(LoadJson);
     }
+    
+    
     public void Clear()
     {
         

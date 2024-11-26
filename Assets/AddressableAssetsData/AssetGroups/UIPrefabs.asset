@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: UI_Prefabs
+  m_Name: UIPrefabs
   m_EditorClassIdentifier: 
-  m_GroupName: UI_Prefabs
+  m_GroupName: UIPrefabs
   m_Data:
     m_SerializedData: []
   m_GUID: b35256601674fb847a9e7b07957370e9
@@ -43,6 +43,18 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0e77eeb3bd08f234f92b6a7c06804099
     m_Address: UIShopItemSlot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62d6418d3ffab2d49ba7b644583ce7d8
+    m_Address: UIDialoguePopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be4092a7105ea3e4f9519a1145f8bc23
+    m_Address: UIDialogueOptionSlot
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

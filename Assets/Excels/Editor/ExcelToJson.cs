@@ -476,7 +476,7 @@ public class ExcelToJson
                     }
                     else if (useAddressables)
                     {
-                        sb.AppendLine($"    public {className}Loader(string path = \"{className}\")");
+                        sb.AppendLine($"    public {className}Loader(Func<string, TextAsset> loadFunc)");
                     }
                     else
                     {
@@ -489,9 +489,7 @@ public class ExcelToJson
                     }
                     else if (useAddressables)
                     {
-                        sb.AppendLine(
-                            "        Addressables.LoadAssetAsync<TextAsset>(path).Completed += handle => { AddDatas(handle.Result.text); };"
-                        );
+                        sb.AppendLine($"        AddDatas(loadFunc(\"{className}\").text);");
                     }
                     else
                     {
@@ -599,7 +597,7 @@ public class ExcelToJson
                     // 파일 처리 후, 빈 값이 감지되었을 때 메시지 출력
                     if (emptyValueDetectedInFile)
                     {
-                        Debug.Log($"Warning: Empty values detected in file '{excelPath}'. Default values were used.");
+                        Debug.LogWarning($"Warning: Empty values detected in file '{excelPath}'. Default values were used.");
                         LogError(logFilePath, $"Empty values detected in file '{excelPath}'. Default values were used.");
                     }
                 }
