@@ -404,7 +404,6 @@ public class ExcelToJson
                     sb.AppendLine("using System;");
                     sb.AppendLine("using System.Collections.Generic;");
                     sb.AppendLine("using System.IO;");
-                    if (useAddressables) sb.AppendLine("using UnityEngine.AddressableAssets;");
                     sb.AppendLine("using UnityEngine;");
                     sb.AppendLine();
                     sb.AppendLine($"[Serializable]");

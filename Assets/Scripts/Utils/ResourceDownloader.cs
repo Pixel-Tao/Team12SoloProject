@@ -15,18 +15,20 @@ public class ResourceDownloader : InitBase
     /// long : 다운로드 크기
     /// </summary>
     public event Action<string[], bool, long> OnInitAddressableCompleted;
+
     /// <summary>
     /// 다운로드 진행 이벤트 params
     /// long : 현재 다운로드 크기
     /// long : 전체 다운로드 크기
     /// </summary>
     public event Action<long, long> OnDownloadProgress;
+
     /// <summary>
     /// 다운로드 완료 이벤트 params
     /// string[] 다운로드 완료한 labels
     /// </summary>
     public event Action<string[]> OnDownloadCompleted;
-    
+
     private string[] labels;
     private long patchSize;
     private Dictionary<string, long> patchMap = new Dictionary<string, long>();
@@ -39,11 +41,11 @@ public class ResourceDownloader : InitBase
 
         return true;
     }
-    
+
     public void InitAddressableAsync(params string[] labels)
     {
         this.labels = labels;
-        Addressables.InitializeAsync().Completed += InitAddressableCompleted;        
+        Addressables.InitializeAsync().Completed += InitAddressableCompleted;
     }
     void InitAddressableCompleted(AsyncOperationHandle<IResourceLocator> obj)
     {
@@ -60,7 +62,7 @@ public class ResourceDownloader : InitBase
             Debug.LogError("Addressable Initialize Failed");
         }
     }
-    
+
     public void CheckUpdateFiles(params string[] labels)
     {
         if (isAddressableInit == false)
@@ -68,21 +70,21 @@ public class ResourceDownloader : InitBase
             Debug.LogError("Addressable is not initialized, InitAddressableAsync method first");
             return;
         }
-        
+
         StartCoroutine(CoCheckUpdateFiles(labels));
     }
-    
+
     IEnumerator CoCheckUpdateFiles(params string[] labels)
     {
         patchSize = default;
-    
+
         foreach (var label in labels)
         {
             var size = Addressables.GetDownloadSizeAsync(label);
             yield return size;
             patchSize += size.Result;
         }
-    
+
         if (patchSize > decimal.Zero)
         {
             OnInitAddressableCompleted?.Invoke(labels, true, patchSize);
@@ -90,44 +92,44 @@ public class ResourceDownloader : InitBase
         else
             OnInitAddressableCompleted?.Invoke(labels, false, 0);
     }
-    
-    
-    public void Download(params string[] labels)
+
+
+    public void Download()
     {
         StartCoroutine(PatchFiles(labels));
     }
-    
-    
+
+
     IEnumerator PatchFiles(params string[] labels)
     {
         foreach (var label in labels)
         {
             var handle = Addressables.GetDownloadSizeAsync(label);
             yield return handle;
-    
+
             if (handle.Result != decimal.Zero)
             {
                 StartCoroutine(DownloadLabel(label));
             }
         }
-    
+
         yield return CheckDownload();
     }
-    
+
     IEnumerator DownloadLabel(string label)
     {
         var handle = Addressables.DownloadDependenciesAsync(label, false);
-    
+
         while (!handle.IsDone)
         {
             patchMap[label] = handle.GetDownloadStatus().DownloadedBytes;
             yield return new WaitForEndOfFrame();
         }
-    
+
         patchMap[label] = handle.GetDownloadStatus().TotalBytes;
         Addressables.Release(handle);
     }
-    
+
     IEnumerator CheckDownload()
     {
         long total = 0;
@@ -137,12 +139,39 @@ public class ResourceDownloader : InitBase
             OnDownloadProgress?.Invoke(patchSize, total);
             if (total == patchSize)
             {
-                OnDownloadCompleted?.Invoke(labels);
+                StartCoroutine(CheckResources(labels));
                 break;
             }
-    
+
             total = 0;
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    IEnumerator CheckResources(string[] labels)
+    {
+        bool[] isDone = new bool[labels.Length];
+        yield return new WaitForSeconds(1f);
+
+        while (isDone.All(s => s))
+        {
+            for (int i = 0; i < labels.Length; i++)
+            {
+                var size = Addressables.GetDownloadSizeAsync(labels[i]);
+                yield return size;
+
+                if (size.Result != decimal.Zero)
+                {
+                    yield return new WaitForSeconds(1f);
+                }
+                else
+                {
+                    isDone[i] = true;
+                }
+            }
+        }
+
+        yield return new WaitForSeconds(1f);
+        OnDownloadCompleted?.Invoke(labels);
     }
 }
